@@ -1,4 +1,4 @@
-package com.pat.firebase
+package com.pst.fusion
 
 import io.flutter.embedding.android.FlutterActivity
 

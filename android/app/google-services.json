@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "868635226520",
+    "project_id": "fusion-23add",
+    "storage_bucket": "fusion-23add.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:868635226520:android:4b821207f8cc40d95b3bed",
+        "android_client_info": {
+          "package_name": "com.pst.fusion"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtA3l61iEv6DZW1HRUJIBTUOngg4jWNIc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
