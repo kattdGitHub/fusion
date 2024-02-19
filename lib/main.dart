@@ -15,12 +15,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'FireBase',
       theme: ThemeData(
-        
         primaryColor: Colors.white,
         fontFamily: "Jost",
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple,
         ),
-
       ),
      home:LoginScreen() ,
     );
