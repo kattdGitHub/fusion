@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -8,7 +7,6 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Vx.gray900,
         title: Text(
           "LoigeScreen",
           style: TextStyle(
@@ -19,7 +17,6 @@ class LoginScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: Container(
-        color: Vx.gray900,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
