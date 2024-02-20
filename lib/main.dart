@@ -1,4 +1,4 @@
-import 'package:firebase/LoginScreen.dart';
+import 'package:firebase/Screen_All/LoginScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'FireBase',
       theme: ThemeData(
-        primaryColor: Colors.white,
+        primaryColor: Colors.deepPurple,
         fontFamily: "Jost",
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple,
         ),
