@@ -31,6 +31,7 @@ class _ForgotPassWordState extends State<ForgotPassWord> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+
           uihlper.CustomTextField(
             Emailcontroller,
             "Email",
