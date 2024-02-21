@@ -1,4 +1,7 @@
 import 'package:firebase/Screen_All/LoginScreen.dart';
+import 'package:firebase/Screen_All/Otpverfiy.dart';
+import 'package:firebase/Screen_All/PhoneScreen.dart';
+import 'package:firebase/halper/chackuser.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +34,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple,
         ),
       ),
-     home:LoginScreen() ,
+     home:PhoneScreen(),
     );
   }
 }
