@@ -1,27 +1,30 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fusion/dashboard/Dashboard.dart';
 import 'package:fusion/screens/auth_screens/login_screen.dart';
+import 'package:fusion/screens/home/restaurant_home_page.dart';
 import 'package:fusion/utils/font_faimly.dart';
 import 'package:fusion/utils/navigator.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Future.delayed(
       const Duration(seconds: 2),
-      () {
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-              builder: (context) => LoginScreen(),
-            ),
-            (route) => false);
+      () async {
+        await FirebaseAuth.instance.signOut();
+        if(FirebaseAuth.instance.currentUser==null) {
+          pushAndRemoveUntil(context, LoginScreen());
+        }{
+          pushAndRemoveUntil(context, Dashboard());
+        }
       },
     );
     super.initState();
