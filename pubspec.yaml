@@ -26,32 +26,40 @@ dependencies:
   flutter_slidable:
     path: custom_package/flutter_slidable
   shared_preferences: ^2.2.2
+  google_sign_in: ^6.2.1
+  fluttertoast: ^8.2.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  flutter_launcher_icons: "^0.13.1"
+# flutter pub get
+# flutter pub run flutter_launcher_icons
+flutter_launcher_icons:
+  android: "ic_launcher"
+
+  image_path: "assets/firebase_logo.png"
+  min_sdk_android: 21
+  web:
+    generate: true
+    image_path: "assets/firebase_logo.png"
+
 flutter:
   uses-material-design: true
   assets:
-    - assets/image_logo/
-    - assets/image_logo/Frame.png
-    - assets/home_icons/
-    - assets/home_display/
+    - assets/image/
+    - assets/icons/
+    - assets/font/
     - assets/
+    - assets/icons/clock 1.png
+  fonts:
+    - family: Yellowtail Regular
+      fonts:
+        - asset: assets/font/Yellowtail-Regular.ttf
+    - family: Lato Regular
+      fonts:
+        - asset: assets/font/Lato-Regular.ttf
 
-  # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
 
 

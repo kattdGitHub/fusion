@@ -16,7 +16,12 @@ class _MyHomePageState extends State<MyHomePage> {
     Future.delayed(
       const Duration(seconds: 2),
       () {
-        pushTo(context, const LoginScreen());
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => LoginScreen(),
+            ),
+            (route) => false);
       },
     );
     super.initState();
@@ -31,8 +36,8 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
-              child: Image(
-                  image: AssetImage("assets/image/Reserva logo 2 1.png")),
+              child:
+                  Image(image: AssetImage("assets/image/Reserva logo 2 1.png")),
             ),
             Text(
               " Your Table, Our Pleasure!",
@@ -48,6 +53,6 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
-
   }
+
 }

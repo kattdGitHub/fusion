@@ -134,8 +134,8 @@ class RestaurantHome extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  height: AppConfig.height * 0.2,
-                  width: AppConfig.width * 0.2,
+                  height: AppConfig.height * 0.1,
+                  width: AppConfig.width * 0.3,
                   decoration: BoxDecoration(
                       color: Colors.green,
                       borderRadius: BorderRadius.circular(12)),
@@ -180,8 +180,8 @@ class RestaurantHome extends StatelessWidget {
                     color: Colors.deepOrange,
                     borderRadius: BorderRadius.circular(6),
                   ),
-                  height: AppConfig.height * 0.2,
-                  width: AppConfig.width * 0.2,
+                  height: AppConfig.height * 0.1,
+                  width: AppConfig.width * 0.3,
                   child: const Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -245,8 +245,8 @@ class RestaurantHome extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  height: AppConfig.height * 0.2,
-                  width: AppConfig.width * 0.2,
+                  height: AppConfig.height * 0.1,
+                  width: AppConfig.width * 0.3,
                   decoration: BoxDecoration(
                       color: Colors.deepPurple,
                       borderRadius: BorderRadius.circular(12)),
@@ -281,7 +281,7 @@ class RestaurantHome extends StatelessWidget {
               ],
             ),
             const SizedBox(
-              height: 20,
+              height: 10,
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -289,7 +289,7 @@ class RestaurantHome extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Container(
-                    height: AppConfig.height * 0.2,
+                    height: AppConfig.height * 0.1,
                     width: AppConfig.width * 0.3,
                     decoration: BoxDecoration(
                       color: Colors.amber,
@@ -324,7 +324,7 @@ class RestaurantHome extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    height: AppConfig.height * 0.2,
+                    height: AppConfig.height * 0.1,
                     width: AppConfig.width * 0.3,
                     decoration: BoxDecoration(
                         color: Colors.amberAccent,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fusion/Password/Forgot_Password.dart';
 import 'package:fusion/Restaurant/restaurant.dart';
 import 'package:fusion/app_config/app_config.dart';
+import 'package:fusion/business_logic/repos/auth_repo.dart';
 import 'package:fusion/dashboard/Dashboard.dart';
 import 'package:fusion/screens/auth_screens/splash.dart';
 import 'package:fusion/screens/home/Choose_a_Restaurant.dart';
@@ -27,9 +28,8 @@ class LoginScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    ElevatedButton(onPressed:() {
-
-                    }, 
+                    ElevatedButton(
+                      onPressed: () {},
                       child: Text(
                         "Skip",
                         style: TextStyle(
@@ -89,10 +89,13 @@ class LoginScreen extends StatelessWidget {
                   ),
                   textAlign: TextAlign.left,
                 ),
-                const TextField(
+                TextField(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                   ),
+                  onTap: () {
+                    AuthRepo();
+                  },
                 ),
                 const SizedBox(
                   height: 20,
@@ -108,7 +111,10 @@ class LoginScreen extends StatelessWidget {
                   ),
                   textAlign: TextAlign.left,
                 ),
-                const TextField(
+                TextField(
+                  onTap: () {
+                    AuthRepo();
+                  },
                   decoration: InputDecoration(
                     suffixIcon: Icon(CupertinoIcons.eye_slash),
                     border: OutlineInputBorder(),
@@ -139,11 +145,10 @@ class LoginScreen extends StatelessWidget {
                   height: 20,
                 ),
                 AppBtn(
-
                   style: TextStyle(color: Colors.white),
                   title: 'Login',
                   onPressed: () {
-                    pushTo(context,ChooseRestaurant());
+                    pushTo(context, ChooseRestaurant());
                   },
                 )
               ],
