@@ -1,23 +1,15 @@
-import 'package:firebase/Screen_All/LoginScreen.dart';
-import 'package:firebase/Screen_All/Otpverfiy.dart';
-import 'package:firebase/Screen_All/PhoneScreen.dart';
-import 'package:firebase/Screen_All/showdata.dart';
-import 'package:firebase/halper/chackuser.dart';
-import 'package:firebase/signup%20page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
-
-import 'firebase_options.dart';
+import 'package:fusion/Savebth/savebtn.dart';
+import 'package:fusion/Theme/theme.dart';
+import 'package:fusion/app_config/app_config.dart';
+import 'package:fusion/dashboard/Dashboard.dart';
+import 'package:fusion/screens/auth_screens/login_screen.dart';
+import 'package:fusion/screens/auth_screens/splash.dart';
+import 'package:fusion/screens/home/restaurant_home_page.dart';
+import 'package:fusion/screens/home/slider_card.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Permission.camera.request();
-  await Permission.photos.request();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
   runApp(const MyApp());
 }
 
@@ -26,18 +18,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    AppConfig.init(context);
     return MaterialApp(
+      title: "Rserva",
       debugShowCheckedModeBanner: false,
-      title: 'fusion',
-      theme: ThemeData(
-        primaryColor: Colors.deepPurple,
-        fontFamily: "Jost",
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
-        ),
-      ),
-      home: SignPage(),
+      themeMode: ThemeMode.system,
+      theme: MyTheme.lightTheme(context),
+      darkTheme: MyTheme.darkTheme(context),
+      home: const MyHomePage(),
     );
   }
 }

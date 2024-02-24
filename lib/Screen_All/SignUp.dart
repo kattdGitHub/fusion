@@ -1,6 +1,6 @@
-import 'package:firebase/Screen_All/home_page.dart';
+import 'package:fusion/Screen_All/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase/halper/Textfield.dart';
+import 'package:fusion/halper/Textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class SingUp extends StatelessWidget {

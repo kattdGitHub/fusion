@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fusion/signup%20page.dart';
 import 'package:flutter/material.dart';
 
 class Showdata extends StatelessWidget {
@@ -7,9 +8,15 @@ class Showdata extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => SignPage()));
+        },
+      ),
       appBar: AppBar(
         title: Text(
-          "Show Data",
+          "Show Users",
         ),
         centerTitle: true,
       ),
@@ -20,15 +27,14 @@ class Showdata extends StatelessWidget {
             if (snapshot.hasData) {
               return ListView.builder(
                 itemBuilder: (context, index) {
+                  final user = snapshot.data?.docs[index];
                   return ListTile(
-                    leading: CircleAvatar(
-                      child: Text("${index + 1}"),
-                    ),
+                    leading: buildAvatarContainer(index, user),
                     title: Text(
-                      "${snapshot.data?.docs[index]["title"]??""}",
+                      "${user?["email"] ?? ""}",
                     ),
                     subtitle: Text(
-                      "${snapshot.data?.docs[index]["description"]??""}",
+                      "${user?["password"] ?? ""}",
                     ),
                   );
                 },
@@ -37,7 +43,8 @@ class Showdata extends StatelessWidget {
             } else if (snapshot.hasError) {
               return Center(
                 child: Container(
-                  height: 500,width: 205,
+                  height: 500,
+                  width: 205,
                   child: Text(
                     "${snapshot.error.toString()}",
                   ),
@@ -56,4 +63,35 @@ class Showdata extends StatelessWidget {
       ),
     );
   }
+
+  Widget buildAvatarContainer(int index, QueryDocumentSnapshot<Map<String, dynamic>>? user) {
+    return Container(
+      width: 50, // Adjust the width as per your requirement
+      height: 50, // Adjust the height as per your requirement
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(color: Colors.black), // Add border styling if needed
+      ),
+      child: user?["image"] == null
+          ? _buildDefaultAvatar(index)
+          : _buildUserImage(user?["image"]),
+    );
+  }
+
+  Widget _buildDefaultAvatar(int index) {
+    return Center(
+      child: Text("${index + 1}"),
+    );
+  }
+
+  Widget _buildUserImage(String imageUrl) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(100),
+      child: Image.network(
+        imageUrl,
+        fit: BoxFit.cover,
+      ),
+    );
+  }
+
 }
