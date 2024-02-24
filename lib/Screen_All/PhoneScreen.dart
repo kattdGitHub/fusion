@@ -29,7 +29,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
             ),
             child: TextField(
               controller: PhoneController,
-              keyboardType: TextInputType.number,
+
               decoration: InputDecoration(
                 hintText: "Enter Phone Number",
                 hintStyle: TextStyle(

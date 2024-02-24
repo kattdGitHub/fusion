@@ -22,7 +22,7 @@ class OtpVerfiy extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          uihlper.CustomTextField(
+          UiHelper.customTextField(
             Otpcontroller,
             "Enter OTP",
             Icons.scatter_plot_outlined,
@@ -31,7 +31,7 @@ class OtpVerfiy extends StatelessWidget {
           SizedBox(
             height: 30,
           ),
-          uihlper.CustomButton(
+          UiHelper.customButton(
             () async {
               try {
                 PhoneAuthCredential credential =

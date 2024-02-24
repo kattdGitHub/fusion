@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class uihlper {
-  static CustomTextField(
+class UiHelper {
+  static Widget  customTextField(
     TextEditingController controller,
     String text,
     IconData iconData,
@@ -26,7 +26,7 @@ class uihlper {
     );
   }
 
-  static CustomButton(
+  static Widget customButton(
     VoidCallback voidCallback,
     String text,
   ) {
@@ -54,7 +54,7 @@ class uihlper {
     );
   }
 
-  static CustomAleriBox(BuildContext context, String text) {
+  static customAlertBox(BuildContext context, String text) {
     showDialog(
       context: context,
       builder: (BuildContext) {
