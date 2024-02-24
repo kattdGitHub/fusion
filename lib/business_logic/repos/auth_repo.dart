@@ -4,18 +4,18 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthRepo {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  static FirebaseAuth auth = FirebaseAuth.instance;
+  static GoogleSignIn googleSignIn = GoogleSignIn();
+  static FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  Future<void> signInWithGoogleAndAddToFirestore() async {
+static Future<void> signInWithGoogleAndAddToFirestore() async {
     try {
       final GoogleSignInAccount? googleSignInAccount =
-          await _googleSignIn.signIn();
+          await googleSignIn.signIn();
 
-      final GoogleSignInAuthentication googleSignInAuthentication =
-          await googleSignInAccount!.authentication;
-
+      final GoogleSignInAuthentication? googleSignInAuthentication =
+          await googleSignInAccount?.authentication;
+   if(googleSignInAuthentication==null)return;
       final OAuthCredential googleAuthCredential =
           GoogleAuthProvider.credential(
         accessToken: googleSignInAuthentication.accessToken,
@@ -23,7 +23,7 @@ class AuthRepo {
       );
 
       final UserCredential userCredential =
-          await _auth.signInWithCredential(googleAuthCredential);
+          await auth.signInWithCredential(googleAuthCredential);
 
       final User? user = userCredential.user;
 
@@ -41,10 +41,10 @@ class AuthRepo {
     }
   }
 
-  Future<void> addUserToFirestore(User? user) async {
+  static Future<void> addUserToFirestore(User? user) async {
     try {
       if (user != null) {
-        final CollectionReference users = _firestore.collection('users');
+        final CollectionReference users = firestore.collection('users');
         await users.doc(user.uid).set({
           'uid': user.uid,
           'displayName': user.displayName,
