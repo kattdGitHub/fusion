@@ -14,15 +14,15 @@ class AppColors {
 
 class MyTheme {
   static ThemeData lightTheme(BuildContext context) => ThemeData(
-        primaryColor: Colors.deepPurple,
+        primaryColor: AppColors.primaryColor,
         cardColor: Colors.white,
         canvasColor: creamColor,
+        backgroundColor: creamColor,
         hintColor: darkBluishColor,
         dividerColor: darkBluishColor,
         disabledColor: Colors.white,
         appBarTheme: AppBarTheme(
-          color: Colors.white,
-          elevation: 0,
+          backgroundColor: Colors.white,
           iconTheme: IconThemeData(color: Colors.black),
         ),
         textTheme: Theme.of(context).textTheme.copyWith(
@@ -86,13 +86,11 @@ class MyTheme {
         cardColor: Colors.black,
         canvasColor: darkCreamColor,
         hintColor: Colors.white,
-        bottomAppBarColor: lightBluishColor,
         dividerColor: Colors.white,
         disabledColor: Colors.white,
-        appBarTheme: const AppBarTheme(
-          color: Colors.white,
-          elevation: 0,
-          iconTheme: IconThemeData(
+        appBarTheme: AppBarTheme(
+          color: creamColor,
+          iconTheme: const IconThemeData(
             color: Colors.white,
           ),
         ),
@@ -149,12 +147,12 @@ class MyTheme {
                   .textTheme
                   .labelSmall
                   ?.copyWith(color: Colors.white),
-            ),
+            ), bottomAppBarTheme: BottomAppBarTheme(color: lightBluishColor),
       );
 
   //color
-  static Color creamColor = Color(0xfff5f5f5);
+  static Color creamColor = const Color(0xfff5f5f5);
   static Color darkCreamColor = Vx.gray900;
-  static Color darkBluishColor = Color(0xff403b58);
+  static Color darkBluishColor = const Color(0xff403b58);
   static Color lightBluishColor = Vx.indigo500;
 }

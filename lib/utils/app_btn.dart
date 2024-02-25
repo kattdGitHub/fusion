@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fusion/Theme/theme.dart';
 import 'package:fusion/app_config/app_config.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -20,7 +21,7 @@ class AppBtn extends StatelessWidget {
     this.height = 50,
     required this.style,
     this.color,
-    this.isLoading = false, // Default value for isLoading
+    this.isLoading = false,
   }) : super(key: key);
 
   @override
@@ -29,35 +30,37 @@ class AppBtn extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-          height: height,
+          height: height.h,
           width: AppConfig.width * width,
           child: ElevatedButton(
             onPressed: isLoading ? null : onPressed,
             style: ButtonStyle(
               maximumSize: MaterialStateProperty.all(
-                  Size(AppConfig.width * width, height)),
+                  Size(AppConfig.width * width, height.h)),
               minimumSize: MaterialStateProperty.all(
-                  Size(AppConfig.width * width, height)),
+                  Size(AppConfig.width * width, height.h)),
               backgroundColor:
                   MaterialStateProperty.all(color ?? AppColors.primaryColor),
             ),
             child:
-                !isLoading // Show loading indicator only if isLoading is false
+                !isLoading
                     ? Padding(
-                        padding: const EdgeInsets.all(10.0),
+                        padding: EdgeInsets.all(10.w),
                         child: Text(
                           title,
                           style: style ??
-                              const TextStyle(
+                              TextStyle(
                                 fontFamily: "Jost",
-                                fontSize: 18,
+                                fontSize: 20.sp,
                                 fontWeight: FontWeight.w600,
                                 color: Colors.white,
                               ),
                           textAlign: TextAlign.left,
                         ),
                       )
-                    : CircularProgressIndicator(), // Loading indicator
+                    : const CircularProgressIndicator(
+                  color: Colors.white,
+                ), // Loading indicator
           ),
         ),
       ],

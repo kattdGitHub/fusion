@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fusion/Password/Forgot_Password.dart';
 import 'package:fusion/Restaurant/restaurant.dart';
@@ -12,7 +13,9 @@ import 'package:fusion/screens/auth_screens/splash.dart';
 import 'package:fusion/screens/home/Choose_a_Restaurant.dart';
 import 'package:fusion/screens/home/restaurant_home_page.dart';
 import 'package:fusion/screens/sign_up.dart';
+import 'package:fusion/utils/CustomTextField.dart';
 import 'package:fusion/utils/app_btn.dart';
+import 'package:fusion/utils/app_validator.dart';
 import 'package:fusion/utils/navigator.dart';
 import 'package:provider/provider.dart';
 
@@ -71,47 +74,53 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(
                       height: 50.h,
                     ),
-                    const Text(
-                      "Email ",
-                      style: TextStyle(
-                        fontFamily: "Jost",
-                        fontSize: 14.689654350280762,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff777777),
-                        height: 21 / 14.689654350280762,
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Email",
+                            style: TextStyle(
+                              fontFamily: "Jost",
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              height: 20 / 14,
+                            ),
+                            textAlign: TextAlign.left,
+                          )
+                        ],
                       ),
-                      textAlign: TextAlign.left,
                     ),
-                    TextFormField(
-                      controller: provider.emailController,
-                      validator: AppValidator.validateEmail,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                    AppTextField(
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                       ),
+                      validator: AppValidator.emailValidator,
+                      controller: provider.emailController,
                     ),
-                    const SizedBox(
-                      height: 20,
+                    const Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            'Password',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontFamily: 'Jost',
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    const Text(
-                      "Password",
-                      style: TextStyle(
-                        fontFamily: "Jost",
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff777777),
-                        height: 20 / 14,
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                    TextFormField(
-                      controller: provider.passwordController,
-                      validator: AppValidator.validatePassword,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                    AppTextField(
+                      obscureText: true,
                       decoration: const InputDecoration(
                         suffixIcon: Icon(CupertinoIcons.eye_slash),
                         border: OutlineInputBorder(),
                       ),
+                      validator: AppValidator.passwordValidator,
+                      controller: provider.passwordController,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -120,14 +129,12 @@ class LoginScreen extends StatelessWidget {
                           onPressed: () {
                             pushTo(context, ForgotPassword());
                           },
-                          child: const Text(
+                          child: Text(
                             "Forgot Password?",
                             style: TextStyle(
-                              fontFamily: "Jost",
-                              fontSize: 17,
-                              fontWeight: FontWeight.w400,
-                              color: Color(0xff777777),
-                              height: 19 / 13,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.bold,
+                              color: CupertinoColors.systemBlue,
                             ),
                             textAlign: TextAlign.left,
                           ),
@@ -144,25 +151,33 @@ class LoginScreen extends StatelessWidget {
                       onPressed: () {
                         if (formKey.currentState?.validate() == false) return;
                         provider.login(context);
-                        // pushTo(context, const ChooseRestaurant());
                       },
                     ),
                     const SizedBox(
                       height: 40,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            provider.googleLogin(context);
-                          },
-                          child: const Image(
-                            image: AssetImage(
-                                "assets/image/google_icon-icons.com_62736 (1) 1.png"),
-                          ),
+                    Container(
+                      padding: EdgeInsets.all(10.w),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Colors.black
                         ),
-                      ],
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              provider.googleLogin(context);
+                            },
+                            child: const Image(
+                              image: AssetImage(
+                                  "assets/image/google_icon-icons.com_62736 (1) 1.png"),
+                            ),
+                          ),
+                        ],
+                      ),
                     )
                   ],
                 ),
@@ -181,29 +196,23 @@ class LoginScreen extends StatelessWidget {
                 text: "Don’t have an account? ",
                 children: [
                   WidgetSpan(
-                      child: InkWell(
-                    onTap: () {
-                      pushTo(context, SignUp());
-                    },
-                    child: const Text(
-                      "Register ",
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: CupertinoColors.systemBlue),
+                    child: InkWell(
+                      onTap: () {
+                        pushTo(context, SignUp());
+                      },
+                      child: Text(
+                        "Register ",
+                        style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.bold,
+                            color: CupertinoColors.systemBlue,
+                        ),
+                      ),
                     ),
-                  )),
-                  // TextSpan(
-                  //   text: "Register",
-                  //   recognizer: TapGestureRecognizer()..onTap = () {},
-                  //   style: TextStyle(
-                  //       fontSize: 14,
-                  //       fontWeight: FontWeight.bold,
-                  //       color: CupertinoColors.systemBlue),
-                  // ) ,
+                  ),
                 ],
-                style: const TextStyle(
-                  fontSize: 14,
+                style: TextStyle(
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ),

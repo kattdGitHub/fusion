@@ -4,7 +4,7 @@ import 'package:fusion/Iconspus/booking.dart';
 import 'package:fusion/Iconspus/MenuPage/menu.dart';
 import 'package:fusion/Iconspus/ProfileIcons/profile_page.dart';
 import 'package:fusion/Restaurant/restaurant.dart';
-import 'package:fusion/halper/provider.dart';
+import 'package:fusion/business_logic/providers/provider.dart';
 import 'package:fusion/screens/home/restaurant_home_page.dart';
 import 'package:provider/provider.dart';
 
@@ -16,7 +16,6 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +23,7 @@ class _DashboardState extends State<Dashboard> {
       builder: (context, provider, child) {
         return Scaffold(
           body: IndexedStack(
-            index: selectedIndex,
+            index: provider.selectedIndex,
             children: [
               const RestaurantHome(),
               const MenuPage(),
@@ -33,7 +32,7 @@ class _DashboardState extends State<Dashboard> {
             ],
           ),
           bottomNavigationBar: BottomNavigationBar(
-            currentIndex: selectedIndex,
+            currentIndex: provider.selectedIndex,
             onTap: (v) => provider.onChanged(v),
             selectedLabelStyle: const TextStyle(
               color: Colors.deepOrange,
@@ -47,13 +46,13 @@ class _DashboardState extends State<Dashboard> {
                   children: [
                     Icon(
                       CupertinoIcons.home,
-                      color: selectedIndex == 0 ? Colors.deepOrange : Colors.black,
+                      color: provider.selectedIndex == 0 ? Colors.deepOrange : Colors.black,
                     ),
                     Text(
                       "Home",
                       style: TextStyle(
                         color:
-                            selectedIndex == 0 ? Colors.deepOrange : Colors.black,
+                            provider.selectedIndex == 0 ? Colors.deepOrange : Colors.black,
                       ),
                     )
                   ],
@@ -65,13 +64,13 @@ class _DashboardState extends State<Dashboard> {
                   children: [
                     Icon(
                       Icons.menu_book,
-                      color: selectedIndex == 1 ? Colors.deepOrange : Colors.black,
+                      color: provider.selectedIndex == 1 ? Colors.deepOrange : Colors.black,
                     ),
                     Text(
                       "Menu",
                       style: TextStyle(
                         color:
-                            selectedIndex == 1 ? Colors.deepOrange : Colors.black,
+                            provider.selectedIndex == 1 ? Colors.deepOrange : Colors.black,
                       ),
                     )
                   ],
@@ -83,13 +82,13 @@ class _DashboardState extends State<Dashboard> {
                   children: [
                     Icon(
                       Icons.list_alt_outlined,
-                      color: selectedIndex == 2 ? Colors.deepOrange : Colors.black,
+                      color: provider.selectedIndex == 2 ? Colors.deepOrange : Colors.black,
                     ),
                     Text(
                       "Bookings",
                       style: TextStyle(
                         color:
-                            selectedIndex == 2 ? Colors.deepOrange : Colors.black,
+                            provider.selectedIndex == 2 ? Colors.deepOrange : Colors.black,
                       ),
                     ),
                   ],
@@ -104,12 +103,12 @@ class _DashboardState extends State<Dashboard> {
                         Icon(
                           CupertinoIcons.profile_circled,
                           color:
-                              selectedIndex == 4 ? Colors.deepOrange : Colors.black,
+                              provider.selectedIndex == 4 ? Colors.deepOrange : Colors.black,
                         ),
                         Text(
                           "Profile",
                           style: TextStyle(
-                            color: selectedIndex == 4
+                            color: provider.selectedIndex == 4
                                 ? Colors.deepOrange
                                 : Colors.black,
                           ),

@@ -1,8 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fusion/Password/One_Time_Password.dart';
+import 'package:fusion/business_logic/providers/auth_provider.dart';
+import 'package:fusion/utils/CustomTextField.dart';
 import 'package:fusion/utils/app_btn.dart';
+import 'package:fusion/utils/app_validator.dart';
 import 'package:fusion/utils/navigator.dart';
+import 'package:provider/provider.dart';
 
 class ForgotPassword extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
@@ -13,86 +18,89 @@ class ForgotPassword extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Center(
-        child: Text(
+        title: Text(
           "Forgot Password",
-          style: const TextStyle(
+          style: TextStyle(
             fontFamily: "Jost",
-            fontSize: 20,
+            fontSize: 20.sp,
             fontWeight: FontWeight.w500,
-            color: Color(0xff000000),
-            height: 29 / 20,
           ),
           textAlign: TextAlign.left,
         ),
-      )),
-      key: formKey,
-      body: Column(
-        children: [
-          SizedBox(
-            height: 40,
-          ),
-          Center(
-            child: Text(
-              "We sent you a code to verify your account.",
-              style: const TextStyle(
-                fontFamily: "Jost",
-                fontSize: 16,
-                fontWeight: FontWeight.w300,
-                color: Color(0xff777777),
-                height: 23 / 16,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          Center(
+      ),
+      body: Consumer<AuthProvider>(
+        builder: (context, provider, child) {
+          return Form(
+            key: formKey,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Row(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: Column(
                 children: [
-                  Text(
-                    "Email or Phone Number",
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  const Center(
+                    child: Text(
+                      "We sent you a code to verify your account.",
+                      style: TextStyle(
+                        fontFamily: "Jost",
+                        fontSize: 16,
+                        fontWeight: FontWeight.w300,
+                        color: Color(0xff777777),
+                        height: 23 / 16,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Email",
+                          style: TextStyle(
+                            fontFamily: "Jost",
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            height: 20 / 14,
+                          ),
+                          textAlign: TextAlign.left,
+                        )
+                      ],
+                    ),
+                  ),
+                  AppTextField(
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                    ),
+                    validator: AppValidator.emailValidator,
+                    controller: provider.emailController,
+                  ),
+                  const SizedBox(
+                    height: 90,
+                  ),
+                  AppBtn(
+                    onPressed: () {
+                      if (formKey.currentState?.validate() == false) return;
+                      provider.resetPassword(context);
+                    },
+                    title: "Continue",
                     style: const TextStyle(
                       fontFamily: "Jost",
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xff777777),
-                      height: 20 / 14,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xfff7f5f5),
+                      height: 26 / 18,
                     ),
-                    textAlign: TextAlign.left,
-                  ),
+                  )
                 ],
               ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 8, right: 8),
-            child: TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 90,
-          ),
-          AppBtn(
-            onPressed: () {
-              pushTo(context, OneTimePassword());
-            },
-            title: "Continue",
-            style: const TextStyle(
-              fontFamily: "Jost",
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-              color: Color(0xfff7f5f5),
-              height: 26 / 18,
-            ),
-          )
-        ],
+          );
+        },
       ),
     );
   }

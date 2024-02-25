@@ -1,8 +1,10 @@
 import 'dart:io';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fusion/Theme/theme.dart';
 import 'package:fusion/halper/Textfield.dart';
 
 import 'package:fusion/halper/image_helper.dart';
-import 'package:fusion/halper/provider.dart';
+import 'package:fusion/business_logic/providers/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -59,21 +61,21 @@ class _SignPageState extends State<SignPage> {
           return Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(height: 50),
+              SizedBox(height: 50.h),
               InkWell(
                 child: provider.pickedImage != null
                     ? CircleAvatar(
-                        radius: 80,
+                        radius: 80.r,
                         backgroundImage: FileImage(provider.pickedImage!),
                       )
                     : CircleAvatar(
-                        backgroundColor: Colors.blueAccent,
-                        radius: 80,
+                  backgroundColor: AppColors.primaryColor,
+                        radius: 80.r,
                         child: SafeArea(
                           child: Icon(
-                            Icons.person_off_sharp,
+                            Icons.person,
                             color: Colors.white,
-                            size: 100,
+                            size: 100.sp,
                           ),
                         ),
                       ),
