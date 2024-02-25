@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fusion/Restaurant/restaurant.dart';
 import 'package:fusion/dashboard/Dashboard.dart';
 import 'package:fusion/screens/home/restaurant_home_page.dart';
 import 'package:fusion/utils/navigator.dart';
@@ -21,16 +23,6 @@ class ChooseRestaurant extends StatefulWidget {
 }
 
 class _ChooseRestaurantState extends State<ChooseRestaurant> {
-  void initState() {
-    Future.delayed(
-      const Duration(seconds: 2),
-      () {
-        pushTo(context, const Dashboard());
-      },
-    );
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,22 +66,19 @@ class _ChooseRestaurantState extends State<ChooseRestaurant> {
               ),
             ),
             onTap: () {
-              // pushTo(context, widget)
+              pushTo(context, Dashboard());
             },
           );
         },
       ),
-      bottomNavigationBar: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Icon(
-              CupertinoIcons.add_circled_solid,
-              size: 60,
-            ),
-          ),
-        ],
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          pushTo(context, AddRestaurant());
+        },
+        child: Icon(
+          CupertinoIcons.add,
+          size: 25.sp,
+        ),
       ),
     );
   }

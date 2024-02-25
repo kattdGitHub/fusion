@@ -6,10 +6,10 @@ import 'package:fusion/business_logic/repos/auth_repo.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CounterProvider with ChangeNotifier {
-  int count = 1;
+  int selectedIndex = 0;
 
-  void increment() {
-    count++;
+  void onChanged(int value) {
+    selectedIndex=value;
     notifyListeners();
   }
 }

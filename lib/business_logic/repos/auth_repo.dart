@@ -58,16 +58,16 @@ class AuthRepo {
       }
     } catch (error, tv) {
       showToast(text: 'Error adding user to Firestore');
-      print(
-          'addUserToFirestore ${tv.toString() + error.toString()}');
+      print('addUserToFirestore ${tv.toString() + error.toString()}');
     }
   }
 
   static Future<bool> doesUserExistWithEmail(String email) async {
     try {
-      List<String> signInMethods =
-          await FirebaseAuth.instance.fetchSignInMethodsForEmail(email);
-      return signInMethods.isNotEmpty;
+        final QuerySnapshot<Map<String, dynamic>> querySnapshot = await FirebaseFirestore.instance
+            .collection('Users').where('email', isEqualTo: email)
+            .get();
+        return querySnapshot.docs.isNotEmpty;
     } catch (e) {
       print('doesUserExistWithEmail $e');
       return false;
@@ -86,12 +86,14 @@ class AuthRepo {
       };
 
       bool userExists = await doesUserExistWithEmail(email);
-      if (!userExists) {
+      if (userExists){
+        showToast(text: 'Email is already Exits');
+        return;
+      }
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: email,
           password: password,
         );
-      }
       final collection = FirebaseFirestore.instance.collection("Users");
       await collection.add(body).then((doc) async {
         String? imagePath = await uploadImageFirebase(
@@ -102,7 +104,7 @@ class AuthRepo {
           "id": doc.id,
           "image": imagePath,
         });
-        print(">>>>>>>>>>>>>User Create<<<<<<<<<<<<<<");
+        print(">>>>>>>>>>>>> User Create <<<<<<<<<<<<<<");
       });
     } catch (e, s) {
       print("createUser ${e.toString() + s.toString()}");
@@ -137,6 +139,20 @@ class AuthRepo {
     } catch (e, s) {
       showToast(text: 'Logout Failed');
       print('signOut ${s.toString() + e.toString()}');
+    }
+  }
+
+  static Future<void> login({
+    required String email,
+    required String password,
+  }) async {
+    try {
+     await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      showToast(text: 'Login Successfully', success: true);
+    } catch (e, s) {
+      showToast(text: 'Login Failed');
+      print('Login ${s.toString() + e.toString()}');
     }
   }
 }

@@ -7,8 +7,8 @@ import 'package:fusion/app_config/app_config.dart';
 import 'package:fusion/utils/app_btn.dart';
 import 'package:fusion/utils/navigator.dart';
 
-class Restaurant extends StatelessWidget {
-  const Restaurant({super.key});
+class AddRestaurant extends StatelessWidget {
+  const AddRestaurant({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -347,7 +347,6 @@ class Restaurant extends StatelessWidget {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(8.0),
         child: AppBtn(
-
           title: "Save",
           style:  const TextStyle(
             fontFamily: "Jost",

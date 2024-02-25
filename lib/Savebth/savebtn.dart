@@ -257,7 +257,7 @@ class RestaurantMadlyan extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   onPressed: () {
-                    pushTo(context, Restaurant());
+                    pushTo(context, AddRestaurant());
                   },
                 ),
                 const Delete(),

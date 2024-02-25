@@ -10,16 +10,18 @@ class AppBtn extends StatelessWidget {
   final Color? color;
   final double width;
   final TextStyle? style;
+  final bool isLoading; // Added loading variable
 
   const AppBtn({
-    super.key,
+    Key? key,
     this.onPressed,
     required this.title,
     this.width = 0.7,
     this.height = 50,
     required this.style,
     this.color,
-  });
+    this.isLoading = false, // Default value for isLoading
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,32 +32,34 @@ class AppBtn extends StatelessWidget {
           height: height,
           width: AppConfig.width * width,
           child: ElevatedButton(
-            onPressed: onPressed,
-           style:  ButtonStyle(
-             maximumSize:  MaterialStateProperty.all(Size(AppConfig.width * width, height)),
-             minimumSize:  MaterialStateProperty.all(Size(AppConfig.width * width, height)),
-             backgroundColor:  MaterialStateProperty.all(color??AppColors.primaryColor,),
-           ),
-            // style: ElevatedButton.styleFrom(
-            //   maximumSize: Size(AppConfig.width * width, height),
-            //   minimumSize: Size(AppConfig.width * width, height),
-            //   backgroundColor:  color??Color(0xffbd8d46),
-            // ),
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Text(
-                title,
-                style:style?? const TextStyle(
-                  fontFamily: "Jost",
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                ),
-                textAlign: TextAlign.left,
-              ),
+            onPressed: isLoading ? null : onPressed,
+            style: ButtonStyle(
+              maximumSize: MaterialStateProperty.all(
+                  Size(AppConfig.width * width, height)),
+              minimumSize: MaterialStateProperty.all(
+                  Size(AppConfig.width * width, height)),
+              backgroundColor:
+                  MaterialStateProperty.all(color ?? AppColors.primaryColor),
             ),
+            child:
+                !isLoading // Show loading indicator only if isLoading is false
+                    ? Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          title,
+                          style: style ??
+                              const TextStyle(
+                                fontFamily: "Jost",
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
+                          textAlign: TextAlign.left,
+                        ),
+                      )
+                    : CircularProgressIndicator(), // Loading indicator
           ),
-        )
+        ),
       ],
     );
   }

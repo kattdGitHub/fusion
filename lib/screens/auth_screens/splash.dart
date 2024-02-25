@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fusion/dashboard/Dashboard.dart';
 import 'package:fusion/screens/auth_screens/login_screen.dart';
+import 'package:fusion/screens/home/Choose_a_Restaurant.dart';
 import 'package:fusion/screens/home/restaurant_home_page.dart';
 import 'package:fusion/utils/font_faimly.dart';
 import 'package:fusion/utils/helper_widget.dart';
@@ -22,8 +23,8 @@ class _SplashScreenState extends State<SplashScreen> {
       () async {
         bool userLoggedIn = await localStorage.getUserLogin();
         if(userLoggedIn) {
-          pushAndRemoveUntil(context, Dashboard());
-        }{
+          pushAndRemoveUntil(context, ChooseRestaurant());
+        }else{
           pushAndRemoveUntil(context, LoginScreen());
         }
       },
@@ -33,9 +34,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
-      child: Scaffold(
-        body: Column(
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -58,5 +59,4 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
     );
   }
-
 }
