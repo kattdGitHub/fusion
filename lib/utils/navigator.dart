@@ -17,13 +17,13 @@ void pushReplacement(BuildContext context, Widget widget) {
       ));
 }
 
-void pushAndRemoveUntil(BuildContext context, Widget widget) {
+void  pushAndRemoveUntil(BuildContext context, Widget widget) {
   Navigator.pushAndRemoveUntil(
     context,
     MaterialPageRoute(
       builder: (context) => widget,
     ),
-    (route) => route.isFirst,
+    (route) => false,
   );
 }
 

@@ -1,4 +1,4 @@
-import 'package:fusion/Screen_All/LoginScreen.dart';
+import 'package:fusion/Screen_All/LoginScreenNew.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => LoginScreen(),
+          builder: (context) => LoginScreenNew(),
         ),
       );
     }

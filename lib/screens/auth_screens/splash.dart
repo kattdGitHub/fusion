@@ -4,6 +4,7 @@ import 'package:fusion/dashboard/Dashboard.dart';
 import 'package:fusion/screens/auth_screens/login_screen.dart';
 import 'package:fusion/screens/home/restaurant_home_page.dart';
 import 'package:fusion/utils/font_faimly.dart';
+import 'package:fusion/utils/helper_widget.dart';
 import 'package:fusion/utils/navigator.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -19,11 +20,11 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(
       const Duration(seconds: 2),
       () async {
-        await FirebaseAuth.instance.signOut();
-        if(FirebaseAuth.instance.currentUser==null) {
-          pushAndRemoveUntil(context, LoginScreen());
-        }{
+        bool userLoggedIn = await localStorage.getUserLogin();
+        if(userLoggedIn) {
           pushAndRemoveUntil(context, Dashboard());
+        }{
+          pushAndRemoveUntil(context, LoginScreen());
         }
       },
     );

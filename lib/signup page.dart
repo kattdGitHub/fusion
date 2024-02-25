@@ -1,7 +1,6 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:fusion/halper/Textfield.dart';
-import 'package:fusion/halper/firebase_repo.dart';
+
 import 'package:fusion/halper/image_helper.dart';
 import 'package:fusion/halper/provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,9 +16,8 @@ class SignPage extends StatefulWidget {
 }
 
 class _SignPageState extends State<SignPage> {
-
   singup(AddUserProvider provider) async {
-    File? pickedImage=provider.pickedImage;
+    File? pickedImage = provider.pickedImage;
     String email = provider.emailController.text;
     String password = provider.passwordController.text;
     if (email.isEmpty || password.isEmpty || pickedImage == null) {
@@ -126,5 +124,4 @@ class _SignPageState extends State<SignPage> {
       }),
     );
   }
-
 }

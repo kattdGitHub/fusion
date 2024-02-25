@@ -2,13 +2,22 @@ import 'package:flutter/material.dart';
 
 import 'package:velocity_x/velocity_x.dart';
 
+import 'package:flutter/material.dart';
+
+class AppColors {
+  static const Color primaryColor = Colors.green;
+  static const Color creamColor = Color(0xfff5f5f5);
+  static const Color darkCreamColor = Color(0xff121212);
+  static const Color darkBluishColor = Color(0xff403b58);
+  static const Color lightBluishColor = Color(0xff64b5f6);
+}
+
 class MyTheme {
   static ThemeData lightTheme(BuildContext context) => ThemeData(
         primaryColor: Colors.deepPurple,
         cardColor: Colors.white,
         canvasColor: creamColor,
         hintColor: darkBluishColor,
-        bottomAppBarColor: darkBluishColor,
         dividerColor: darkBluishColor,
         disabledColor: Colors.white,
         appBarTheme: AppBarTheme(
@@ -69,7 +78,7 @@ class MyTheme {
                   .textTheme
                   .labelSmall
                   ?.copyWith(color: Colors.black),
-            ),
+            ), bottomAppBarTheme: BottomAppBarTheme(color: darkBluishColor),
       );
 
   static ThemeData darkTheme(BuildContext context) => ThemeData(

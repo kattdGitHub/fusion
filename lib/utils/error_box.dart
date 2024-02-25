@@ -6,11 +6,16 @@ void showToast({
   required String text,
   bool success = false,
 }) {
-  Fluttertoast.showToast(
-      msg: text,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.TOP,
-      backgroundColor: success ? Colors.green : Colors.red,
-      textColor: Colors.white,
-      fontSize: 16.sp);
+  try {
+    Fluttertoast.showToast(
+        msg: text,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.TOP,
+        backgroundColor: success ? Colors.green : Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.sp);
+  } catch (e, s) {
+    print(
+        'Error adding user to Firestore: ${s.toString() + e.toString()}');
+  }
 }

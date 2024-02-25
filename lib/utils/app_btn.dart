@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fusion/Theme/theme.dart';
 import 'package:fusion/app_config/app_config.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -33,7 +34,7 @@ class AppBtn extends StatelessWidget {
            style:  ButtonStyle(
              maximumSize:  MaterialStateProperty.all(Size(AppConfig.width * width, height)),
              minimumSize:  MaterialStateProperty.all(Size(AppConfig.width * width, height)),
-             backgroundColor:  MaterialStateProperty.all(color??Color(0xffbd8d46)),
+             backgroundColor:  MaterialStateProperty.all(color??AppColors.primaryColor,),
            ),
             // style: ElevatedButton.styleFrom(
             //   maximumSize: Size(AppConfig.width * width, height),

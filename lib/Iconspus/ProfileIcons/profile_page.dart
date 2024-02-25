@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:fusion/Iconspus/ProfileIcons/notification_icon.dart';
+import 'package:fusion/Theme/theme.dart';
+import 'package:fusion/business_logic/providers/auth_provider.dart';
 import 'package:fusion/screens/auth_screens/login_screen.dart';
+import 'package:fusion/utils/helper_widget.dart';
 import 'package:fusion/utils/navigator.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(bottomSheet: Column( children: []),
+    return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
@@ -121,9 +125,11 @@ class ProfilePage extends StatelessWidget {
                       child: CircleAvatar(
                         backgroundColor: Colors.orange,
                         child: Image(
-                          image: AssetImage("assets/icons/notification-bing.png"),
+                          image:
+                              AssetImage("assets/icons/notification-bing.png"),
                         ),
-                      ),onTap: () {
+                      ),
+                      onTap: () {
                         pushTo(context, Notification_icons());
                       },
                     ),
@@ -260,34 +266,41 @@ class ProfilePage extends StatelessWidget {
                   Icon(Icons.arrow_forward_ios_rounded)
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Image(
-                    image: AssetImage("assets/icons/Group 1171276084.png"),
-                    width: 70,
-                    height: 70,
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  InkWell(
-                    child: const Text(
-                      "Logout",
-                      style: TextStyle(
-                        fontFamily: "Poppins",
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xffbd8d46),
-                        height: 24 / 16,
+              Consumer<AuthProvider>(
+                builder:(context, provider, child){
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if(provider.logOutLoading)...{
+                     getCustomLoading,
+                  },
+                      const Image(
+                        image: AssetImage("assets/icons/Group 1171276084.png"),
+                        width: 70,
+                        height: 70,
+                       ),
+                      const SizedBox(
+                        width: 5,
                       ),
-                      textAlign: TextAlign.left,
-                    ),
-                    onTap: () {
-                      pushTo(context, const LoginScreen());
-                    },
-                  )
-                ],
+                      InkWell(
+                        child: const Text(
+                          "Logout",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: Color(0xffbd8d46),
+
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                        onTap: () {
+                          provider.logOut(context);
+                        },
+                      )
+                    ],
+                  );
+                }
               )
             ],
           ),

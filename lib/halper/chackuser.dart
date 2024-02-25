@@ -1,5 +1,5 @@
-import 'package:fusion/Screen_All/LoginScreen.dart';
-import 'package:fusion/Screen_All/home_page.dart';
+import 'package:fusion/Screen_All/LoginScreenNew.dart';
+import 'package:fusion/Screen_All/home_pageNew.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
@@ -18,6 +18,6 @@ chackuser() {
   if (User != null) {
     return HomePage();
   } else {
-    return LoginScreen();
+    return LoginScreenNew();
   }
 }

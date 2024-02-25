@@ -2,9 +2,8 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:fusion/business_logic/repos/auth_repo.dart';
 import 'package:image_picker/image_picker.dart';
-
-import 'firebase_repo.dart';
 
 class CounterProvider with ChangeNotifier {
   int count = 1;
@@ -25,7 +24,7 @@ class AddUserProvider with ChangeNotifier {
     loading = true;
     notifyListeners();
     try {
-      await FirebaseRepo.createUser(
+      await AuthRepo.createUser(
         email: emailController.text,
         password: passwordController.text,
         imageFile: pickedImage ?? File(""),
