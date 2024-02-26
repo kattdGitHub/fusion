@@ -12,7 +12,28 @@
           "package_name": "com.pst.fusion"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "868635226520-7u62bp9qncg6fh47325o3h8scal66a4f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pst.fusion",
+            "certificate_hash": "8994a0eb89a085946d47019cce47cd01c0658ea1"
+          }
+        },
+        {
+          "client_id": "868635226520-f63vs569aioqb6ea0lnah31a3ovnem0l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pst.fusion",
+            "certificate_hash": "b4415647b5543574076c002659f3392317862be7"
+          }
+        },
+        {
+          "client_id": "868635226520-jhae2ev5iinn4c6nic6072af3b1b938a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAtA3l61iEv6DZW1HRUJIBTUOngg4jWNIc"
@@ -20,7 +41,57 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "868635226520-jhae2ev5iinn4c6nic6072af3b1b938a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:868635226520:android:199111c138dc2d465b3bed",
+        "android_client_info": {
+          "package_name": "com.pst.fusion_booking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "868635226520-5vtoa4f4fu5c2o0k3kqq8jsck770b1tc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pst.fusion_booking",
+            "certificate_hash": "8994a0eb89a085946d47019cce47cd01c0658ea1"
+          }
+        },
+        {
+          "client_id": "868635226520-isqob2106dpqt7smmpsk4uog5oh1n4ue.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pst.fusion_booking",
+            "certificate_hash": "b4415647b5543574076c002659f3392317862be7"
+          }
+        },
+        {
+          "client_id": "868635226520-jhae2ev5iinn4c6nic6072af3b1b938a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtA3l61iEv6DZW1HRUJIBTUOngg4jWNIc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "868635226520-jhae2ev5iinn4c6nic6072af3b1b938a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     },

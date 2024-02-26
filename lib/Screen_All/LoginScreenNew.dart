@@ -1,13 +1,13 @@
-import 'package:firebase/Screen_All/forgot%20password.dart';
-import 'package:firebase/Screen_All/home_page.dart';
-import 'package:firebase/halper/Textfield.dart';
+import 'package:fusion/Screen_All/forgot%20password.dart';
+import 'package:fusion/Screen_All/home_pageNew.dart';
+import 'package:fusion/halper/Textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'SignUp.dart';
+import 'SignUpNew.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class LoginScreenNew extends StatelessWidget {
+  LoginScreenNew({super.key});
 
   TextEditingController Emailcontroller = TextEditingController();
 
@@ -15,7 +15,7 @@ class LoginScreen extends StatelessWidget {
 
   login(String email, String password, context) async {
     if (email == "" && password == "") {
-      return uihlper.CustomAleriBox(context, "Enter Requried Fields");
+      return UiHelper.customAlertBox(context, "Enter Requried Fields");
     } else {
       try {
         UserCredential? userCredential = await FirebaseAuth.instance
@@ -27,7 +27,7 @@ class LoginScreen extends StatelessWidget {
           ),
         );
       } on FirebaseAuthException catch (ex) {
-        return uihlper.CustomAleriBox(context, ex.code.toString());
+        return UiHelper.customAlertBox(context, ex.code.toString());
       }
     }
   }
@@ -50,7 +50,7 @@ class LoginScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          uihlper.CustomTextField(
+          UiHelper.customTextField(
             Emailcontroller,
             "Email",
             Icons.email,
@@ -59,7 +59,7 @@ class LoginScreen extends StatelessWidget {
           SizedBox(
             height: 30,
           ),
-          uihlper.CustomTextField(
+          UiHelper.customTextField(
             PassWordcontroller,
             "Password",
             Icons.password,
@@ -68,7 +68,7 @@ class LoginScreen extends StatelessWidget {
           SizedBox(
             height: 50,
           ),
-          uihlper.CustomButton(
+          UiHelper.customButton(
             () {
               login(
                 Emailcontroller.text.toString(),

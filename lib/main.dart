@@ -1,16 +1,19 @@
-import 'package:firebase/Screen_All/LoginScreen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
+import 'package:fusion/Theme/theme.dart';
+import 'package:fusion/app_config/app_config.dart';
+import 'package:fusion/business_logic/providers/auth_provider.dart';
+import 'package:fusion/business_logic/providers/provider.dart';
+import 'package:fusion/screens/auth_screens/splash.dart';
+import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-
     options: DefaultFirebaseOptions.currentPlatform,
-
   );
   runApp(const MyApp());
 }
@@ -18,24 +21,33 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-
   @override
   Widget build(BuildContext context) {
-    final login=FirebaseAuth.instance.currentUser!=null;
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'FireBase',
-      theme: ThemeData(
-        primaryColor: Colors.deepPurple,
-        fontFamily: "Jost",
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple,
-        ),
+    AppConfig.init(context);
+    return ScreenUtilInit(
+      designSize: const Size(
+        360,
+        690,
       ),
-     home:LoginScreen() ,
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_, child) {
+        return MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (context) => AuthProvider()),
+            ChangeNotifierProvider(create: (context) => CounterProvider()),
+            ChangeNotifierProvider(create: (context) => AddUserProvider()),
+          ],
+          child: MaterialApp(
+            title: "Fusion",
+            debugShowCheckedModeBanner: false,
+            themeMode: ThemeMode.light,
+            theme: MyTheme.lightTheme(context),
+            darkTheme: MyTheme.darkTheme(context),
+            home: const SplashScreen(),
+          ),
+        );
+      },
     );
   }
 }
-
-
-
-

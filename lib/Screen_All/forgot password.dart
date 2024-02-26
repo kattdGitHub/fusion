@@ -1,4 +1,4 @@
-import 'package:firebase/halper/Textfield.dart';
+    import 'package:fusion/halper/Textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +14,7 @@ class _ForgotPassWordState extends State<ForgotPassWord> {
 
   forgotPassword(String email) {
     if (email == "") {
-      return uihlper.CustomAleriBox(
+      return UiHelper.customAlertBox(
           context, "Enter an Email To Reset Password");
     } else {
       FirebaseAuth.instance.sendPasswordResetEmail(email: email);
@@ -32,7 +32,7 @@ class _ForgotPassWordState extends State<ForgotPassWord> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
 
-          uihlper.CustomTextField(
+          UiHelper.customTextField(
             Emailcontroller,
             "Email",
             Icons.email,
@@ -41,7 +41,7 @@ class _ForgotPassWordState extends State<ForgotPassWord> {
           SizedBox(
             height: 30,
           ),
-          uihlper.CustomButton(
+          UiHelper.customButton(
             () {
               forgotPassword(
                 Emailcontroller.text.toString(),

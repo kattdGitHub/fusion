@@ -1,6 +1,6 @@
-import 'package:firebase/Screen_All/home_page.dart';
+import 'package:fusion/Screen_All/home_pageNew.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase/halper/Textfield.dart';
+import 'package:fusion/halper/Textfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class SingUp extends StatelessWidget {
@@ -12,7 +12,7 @@ class SingUp extends StatelessWidget {
     TextEditingController PassWordcontroller = TextEditingController();
     signUp(String email, String password) async {
       if (email == "" && password == "") {
-        uihlper.CustomAleriBox(context, "Enter Required Fields");
+        UiHelper.customAlertBox(context, "Enter Required Fields");
       } else {
         try {
           UserCredential? userCredential =
@@ -23,7 +23,7 @@ class SingUp extends StatelessWidget {
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => HomePage()));
         } on FirebaseAuthException catch (ex) {
-          return uihlper.CustomAleriBox(context, ex.code.toString());
+          return UiHelper.customAlertBox(context, ex.code.toString());
         }
       }
     }
@@ -44,7 +44,7 @@ class SingUp extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          uihlper.CustomTextField(
+          UiHelper.customTextField(
             Emailcontroller,
             "Email",
             Icons.email,
@@ -53,7 +53,7 @@ class SingUp extends StatelessWidget {
           SizedBox(
             height: 30,
           ),
-          uihlper.CustomTextField(
+          UiHelper.customTextField(
             PassWordcontroller,
             "Password",
             Icons.password,
@@ -62,7 +62,7 @@ class SingUp extends StatelessWidget {
           SizedBox(
             height: 50,
           ),
-          uihlper.CustomButton(
+          UiHelper.customButton(
             () {
               signUp(
                 Emailcontroller.text.toString(),

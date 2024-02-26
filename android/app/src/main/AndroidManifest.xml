@@ -1,6 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Permission to access the camera -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- Permission to read from external storage (gallery) -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <!-- Permission to write to external storage (gallery) -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
-        android:label="firebase"
+        android:label="Fusion"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
