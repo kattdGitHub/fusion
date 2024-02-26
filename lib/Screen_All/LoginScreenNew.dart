@@ -6,9 +6,14 @@ import 'package:flutter/material.dart';
 
 import 'SignUpNew.dart';
 
-class LoginScreenNew extends StatelessWidget {
-  LoginScreenNew({super.key});
+class LoginScreenNew extends StatefulWidget {
+  const LoginScreenNew({super.key});
 
+  @override
+  State<LoginScreenNew> createState() => _LoginScreenNewState();
+}
+
+class _LoginScreenNewState extends State<LoginScreenNew> {
   TextEditingController Emailcontroller = TextEditingController();
 
   TextEditingController PassWordcontroller = TextEditingController();
