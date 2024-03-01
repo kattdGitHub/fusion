@@ -62,7 +62,11 @@ class AddRestaurant extends StatelessWidget {
 
       // Update the Firestore document with image and document URLs
       await restaurantRef.update({
+<<<<<<< HEAD
         "id": restaurantRef.id,
+=======
+        "id":restaurantRef.id,
+>>>>>>> origin/main
         'imageUrl': imageDownloadUrl,
         'documentUrl': documentDownloadUrl,
       });
@@ -81,7 +85,11 @@ class AddRestaurant extends StatelessWidget {
       Reference storageReference =
       FirebaseStorage.instance.ref().child('$folder/$fileName');
       TaskSnapshot taskSnapshot =
+
       await storageReference.putFile(File(fileUrl));
+
+          await storageReference.putFile(File(fileUrl));
+origin/main
       return await taskSnapshot.ref.getDownloadURL();
     } catch (error) {
       print('Error uploading file to storage: $error');
