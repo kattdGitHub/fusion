@@ -205,60 +205,74 @@ class AddRestaurant extends StatelessWidget {
                         textAlign: TextAlign.left,
                       ),
                     ),
-                    Container(
-                      height: 60,
-                      width: AppConfig.width,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                validator: (value) =>
-                                    AppValidator.customValidator(
-                                        value: value, massage: "Open Time"),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: InkWell(
+                              onTap: () => provider.selectTime(
+                                context,
                                 controller: provider.openTimeController,
-                                style: TextStyle(
-                                  fontFamily: "Open Time",
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xff979797),
-                                  height: 16 / 12,
-                                ),
-                                decoration: InputDecoration(
-                                  labelText: 'Open Time',
-                                  border: OutlineInputBorder(),
+                              ),
+                              child: IgnorePointer(
+                                ignoring: true,
+                                child: TextFormField(
+                                  validator: (value) =>
+                                      AppValidator.customValidator(
+                                          value: value, massage: "Open Time"),
+                                  controller: provider.openTimeController,
+                                  style: TextStyle(
+                                    fontFamily: "Open Time",
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color(0xff979797),
+                                    height: 16 / 12,
+                                  ),
+                                  decoration: InputDecoration(
+                                    labelText: 'Open Time',
+                                    border: OutlineInputBorder(),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                validator: (value) =>
-                                    AppValidator.customValidator(
-                                  value: value,
-                                  massage: "Close Time",
-                                ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: InkWell(
+                              onTap: () => provider.selectTime(
+                                context,
                                 controller: provider.closeTimeController,
-                                style: TextStyle(
-                                  fontFamily: "Close Time",
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xff979797),
-                                  height: 16 / 12,
-                                ),
-                                decoration: InputDecoration(
-                                  labelText: 'Close Time',
-                                  border: OutlineInputBorder(),
+                              ),
+                              child: IgnorePointer(
+                                ignoring: true,
+                                child: TextFormField(
+                                  validator: (value) =>
+                                      AppValidator.customValidator(
+                                    value: value,
+                                    massage: "Close Time",
+                                  ),
+                                  controller: provider.closeTimeController,
+                                  style: TextStyle(
+                                    fontFamily: "Close Time",
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color(0xff979797),
+                                    height: 16 / 12,
+                                  ),
+                                  decoration: InputDecoration(
+                                    labelText: 'Close Time',
+                                    border: OutlineInputBorder(),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                     Padding(
                       padding: EdgeInsets.all(8.0),

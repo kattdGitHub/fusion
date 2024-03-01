@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
@@ -62,8 +63,8 @@ class RestaurantsProvider with ChangeNotifier {
   void pickDoc() async {
     try {
       FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type:FileType.custom,
-        allowedExtensions: [ 'pdf', 'doc'],
+        type: FileType.custom,
+        allowedExtensions: ['pdf', 'doc'],
       );
       if (result == null || result.files.isEmpty) return;
 
@@ -75,4 +76,25 @@ class RestaurantsProvider with ChangeNotifier {
     }
   }
 
+  Future<void> selectTime(BuildContext context,{required TextEditingController controller,}) async {
+    try {
+      final TimeOfDay? picked_s = await showTimePicker(
+          context: context,
+          initialTime: TimeOfDay.now(),
+          builder: (BuildContext context, Widget? child) {
+            return MediaQuery(
+              data:
+                  MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+              child: child ?? SizedBox(),
+            );
+          },
+      );
+      if (picked_s != null){
+        print("{${picked_s}}");
+        // controller.text=picked_s.
+      } ;
+    } catch (e, s) {
+      print(s);
+    }
+  }
 }
