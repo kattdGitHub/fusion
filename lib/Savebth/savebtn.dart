@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fusion/Restaurant/restaurant.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fusion/Restaurant/add_restaurant.dart';
 import 'package:fusion/Savebth/Add_Guest.dart';
 import 'package:fusion/Savebth/Delete.dart';
 import 'package:fusion/Savebth/Details.dart';
@@ -16,7 +17,6 @@ class RestaurantMadlyan extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
         centerTitle: true,
         title: Row(
           children: [
@@ -46,15 +46,15 @@ class RestaurantMadlyan extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(mainAxisAlignment: MainAxisAlignment.center,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
+      SizedBox(
+                      width: 0.9*AppConfig.width,
                       child: const Image(
                           image: AssetImage("assets/image/Rectangle555.png")),
                     ),
-                  ),
+
                 ],
               ),
             ),
@@ -74,27 +74,21 @@ class RestaurantMadlyan extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: 100,
+              child: SizedBox(
+                height: 150.h,
                 width: AppConfig.width,
                 child: const SafeArea(
-                  child: Row(
-                    children: [
-                      Text(
-                        "Restaurant Madlyan is a cozy, family-owned restaurant \n"
-                        "located in the heart of downtown. Our menu features \nclassic"
-                        "Italian comfort food, made with fresh, locally-\nsourced"
-                        "ingredients. From our pasta and crispybacon to \nour "
-                        "juicy...... ",
-                        style: TextStyle(
-                          fontFamily: "Jost",
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xff777777),
-                        ),
-                        textAlign: TextAlign.start,
-                      ),
-                    ],
+                  child: Text(
+                    '''Restaurant Madlyan is a cozy, family-owned restaurantlocated in the heart of downtown. Our menu features classic
+                        Italian comfort food, made with fresh, locally-sourced ingredients. From our pasta and crispybacon to our 
+                        juicy...... ''',
+                    style: TextStyle(
+                      fontFamily: "Jost",
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xff777777),
+                    ),
+                    textAlign: TextAlign.start,
                   ),
                 ),
               ),
@@ -106,7 +100,8 @@ class RestaurantMadlyan extends StatelessWidget {
                 style: TextStyle(),
                 textAlign: TextAlign.left,
               ),
-            ), Padding(
+            ),
+            Padding(
               padding: EdgeInsets.all(8.0),
               child: InkWell(
                 child: Text(
@@ -119,7 +114,8 @@ class RestaurantMadlyan extends StatelessWidget {
                     height: 26 / 18,
                   ),
                   textAlign: TextAlign.left,
-                ),onTap: () {
+                ),
+                onTap: () {
                   pushTo(context, Details());
                 },
               ),
@@ -170,9 +166,9 @@ class RestaurantMadlyan extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(5.0),
-                      child: Container(
+                      child: SizedBox(
                         height: 10,
-                        child: const Image(
+                        child: Image(
                           image: AssetImage("assets/icons/ps.png"),
                         ),
                       ),
@@ -207,9 +203,9 @@ class RestaurantMadlyan extends StatelessWidget {
       builder: (BuildContext context) {
         return Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Container(
+          child: SizedBox(
             height: 272,
-            width: AppConfig.width ,
+            width: AppConfig.width,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [

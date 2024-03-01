@@ -33,7 +33,7 @@ showImageDialog(BuildContext context,{
               },
               title: const Text("Image"),
               leading: const Icon(Icons.image),
-            )
+            ),
           ],
         ),
       );

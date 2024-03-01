@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fusion/Iconspus/booking.dart';
 import 'package:fusion/Iconspus/MenuPage/menu.dart';
 import 'package:fusion/Iconspus/ProfileIcons/profile_page.dart';
-import 'package:fusion/Restaurant/restaurant.dart';
+import 'package:fusion/Restaurant/add_restaurant.dart';
 import 'package:fusion/business_logic/providers/provider.dart';
 import 'package:fusion/screens/home/restaurant_home_page.dart';
 import 'package:provider/provider.dart';

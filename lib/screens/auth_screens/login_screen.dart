@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fusion/Password/Forgot_Password.dart';
-import 'package:fusion/Restaurant/restaurant.dart';
+import 'package:fusion/Restaurant/add_restaurant.dart';
 import 'package:fusion/app_config/app_config.dart';
 import 'package:fusion/business_logic/providers/auth_provider.dart';
 import 'package:fusion/business_logic/repos/auth_repo.dart';
