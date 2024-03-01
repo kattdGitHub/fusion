@@ -16,18 +16,18 @@ class SliderCard extends StatelessWidget {
           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "John Smith",
-                style: TextStyle(
-                  fontFamily: "Jost",
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xff000000),
-                  height: 23 / 16,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              Row(
+              // Text(
+              //   "John Smith",
+              //   style: TextStyle(
+              //     fontFamily: "Jost",
+              //     fontSize: 16,
+              //     fontWeight: FontWeight.w500,
+              //     color: Color(0xff000000),
+              //     height: 23 / 16,
+              //   ),
+              //   textAlign: TextAlign.center,
+              // ),
+               Row(
                 children: [
                   Text(
                     "9 mins delay",

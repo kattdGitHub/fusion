@@ -1,5 +1,10 @@
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fusion/Savebth/savebtn.dart';
@@ -8,7 +13,82 @@ import 'package:fusion/utils/app_btn.dart';
 import 'package:fusion/utils/navigator.dart';
 
 class AddRestaurant extends StatelessWidget {
-  const AddRestaurant({super.key});
+   AddRestaurant({super.key});
+
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController locationController = TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
+  final TextEditingController websiteController = TextEditingController();
+  final TextEditingController openTimeController = TextEditingController();
+  final TextEditingController closeTimeController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController imageUrlController = TextEditingController();
+  final TextEditingController documentUrlController = TextEditingController();
+
+  // Function to save restaurant details to Firestore
+  Future<void> saveRestaurantDetails() async {
+    try {
+      String name = nameController.text;
+      String location = locationController.text;
+      String phoneNumber = phoneNumberController.text;
+      String website = websiteController.text;
+      String openTime = openTimeController.text;
+      String closeTime = closeTimeController.text;
+      String description = descriptionController.text;
+      String imageUrl = imageUrlController.text;
+      String documentUrl = documentUrlController.text;
+      String? userId = FirebaseAuth.instance.currentUser?.uid;
+
+      // Save restaurant details to Firestore
+      DocumentReference restaurantRef =
+          await FirebaseFirestore.instance.collection('restaurants').add({
+        'name': name,
+        'userId': userId,
+        'location': location,
+        'phoneNumber': phoneNumber,
+        'website': website,
+        'openTime': openTime,
+        'closeTime': closeTime,
+        'description': description,
+      });
+
+      // Upload image to Firebase Storage and get the URL
+      String imageDownloadUrl = await uploadFileToStorage(
+          imageUrl, 'images', 'restaurant_${restaurantRef.id}.jpg');
+
+      // Upload document to Firebase Storage and get the URL
+      String documentDownloadUrl = await uploadFileToStorage(
+          documentUrl, 'documents', 'restaurant_${restaurantRef.id}.pdf');
+
+      // Update the Firestore document with image and document URLs
+      await restaurantRef.update({
+        "id":restaurantRef.id,
+        'imageUrl': imageDownloadUrl,
+        'documentUrl': documentDownloadUrl,
+      });
+
+      print('Restaurant details saved successfully');
+    } catch (error) {
+      print('Error saving restaurant details: $error');
+      // Handle errors as needed
+    }
+  }
+
+  // Function to upload file to Firebase Storage
+  Future<String> uploadFileToStorage(
+      String fileUrl, String folder, String fileName) async {
+    try {
+      Reference storageReference =
+          FirebaseStorage.instance.ref().child('$folder/$fileName');
+      TaskSnapshot taskSnapshot =
+          await storageReference.putFile(File(fileUrl));
+      return await taskSnapshot.ref.getDownloadURL();
+    } catch (error) {
+      print('Error uploading file to storage: $error');
+      // Handle errors as needed
+      return '';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,12 +172,13 @@ class AddRestaurant extends StatelessWidget {
                     color: Color(0xff777777),
                     height: 17 / 12,
                   ),
-                  textAlign: TextAlign.left,
+                  textAlign: TextAlign.left,  `
                 ),
               ),
               const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: TextField(
+
                   decoration: InputDecoration(
                     hintText: 'Phone Number',
                     contentPadding: EdgeInsets.all(10),
@@ -146,13 +227,18 @@ class AddRestaurant extends StatelessWidget {
               Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: DropdownSearch<String>.multiSelection(
-                    items: ["Brazil", "Italia (Disabled)", "Tunisia""Brazil", "Italia (Disabled)", "Tunisia", 'Canada'],
+                    items: [
+                      "Brazil",
+                      "Italia (Disabled)",
+                      "Tunisia" "Brazil",
+                      "Italia (Disabled)",
+                      "Tunisia",
+                      'Canada'
+                    ],
                     popupProps: const PopupPropsMultiSelection.menu(
                       showSelectedItems: true,
-
                     ),
                     onChanged: print,
-
                   )),
               const Padding(
                 padding: EdgeInsets.all(8.0),
@@ -348,7 +434,7 @@ class AddRestaurant extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: AppBtn(
           title: "Save",
-          style:  const TextStyle(
+          style: const TextStyle(
             fontFamily: "Jost",
             fontSize: 18,
             fontWeight: FontWeight.w400,
@@ -356,8 +442,10 @@ class AddRestaurant extends StatelessWidget {
             height: 26 / 18,
           ),
           onPressed: () {
-
-            pushTo(context, const RestaurantMadlyan(), );
+            pushTo(
+              context,
+              const RestaurantMadlyan(),
+            );
           },
         ),
       ),

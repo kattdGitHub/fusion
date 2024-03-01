@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fusion/app_config/app_config.dart';
 import 'package:fusion/icons/switch.dart';
@@ -21,21 +22,37 @@ class RestaurantHome extends StatelessWidget {
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: Text(
-                    "New Booking!",
-                    style: TextStyle(
-                      fontFamily: "Poppins",
-                      fontSize: 25.3799991607666,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xff111111),
-                      height: 38 / 25.3799991607666,
-                    ),
-                    textAlign: TextAlign.center,
+                  title: Column(
+                    children: [
+                      Text(
+                        "New Booking!",
+                        style: TextStyle(
+                          fontFamily: "Poppins",
+                          fontSize: 25.3799991607666,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xff111111),
+                          height: 38 / 25.3799991607666,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        "John Smith",
+                        style: TextStyle(
+                          fontFamily: "Jost",
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xff000000),
+                        ),
+                      ),
+                      SliderCard(),
+                    ],
                   ),
                   content: Column(
-                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      SliderCard(),
+
                       Container(height: 10),
                       AppBtn(
                         onPressed: () {
@@ -43,12 +60,12 @@ class RestaurantHome extends StatelessWidget {
                         },
                         width: 0.5,
                         title: "Confirmed",
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontFamily: "Jost",
-                          fontSize: 14.36882209777832,
+                          fontSize: 14.36882209777832.sp,
                           fontWeight: FontWeight.w600,
                           color: Color(0xff010100),
-                          height: 21 / 14.36882209777832,
+                          height: 21 / 14.36882209777832.h,
                         ),
                         color: Colors.green,
                       ),
@@ -56,12 +73,12 @@ class RestaurantHome extends StatelessWidget {
                       AppBtn(
                         width: 0.5,
                         title: "Cancelled",
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontFamily: "Jost",
-                          fontSize: 14.36882209777832,
+                          fontSize: 14.36882209777832.sp,
                           fontWeight: FontWeight.w600,
                           color: Color(0xff010100),
-                          height: 21 / 14.36882209777832,
+                          height: 21 / 14.36882209777832.h,
                         ),
                         color: Colors.red,
                         onPressed: () {

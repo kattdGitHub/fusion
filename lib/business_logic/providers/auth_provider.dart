@@ -68,10 +68,10 @@ class AuthProvider with ChangeNotifier {
 
   Future<void> googleLogin(BuildContext context) async {
     try {
-      final response= await AuthRepo.signInWithGoogleAndAddToFirestore();
+      final response = await AuthRepo.signInWithGoogleAndAddToFirestore();
 
       /// save user is login
-      if(response==false)return;
+      if (response == false) return;
       await localStorage.setUserLogin(true);
       pushAndRemoveUntil(context, const ChooseRestaurant());
     } catch (e, s) {
@@ -83,12 +83,12 @@ class AuthProvider with ChangeNotifier {
     try {
       logOutLoading = true;
       notifyListeners();
-      final response=await AuthRepo.signOut();
+      final response = await AuthRepo.signOut();
       logOutLoading = false;
       notifyListeners();
 
       /// save user is login
-      if(response==false)return;
+      if (response == false) return;
       await localStorage.setUserLogin(false);
       pushAndRemoveUntil(context, LoginScreen());
     } catch (e, s) {
@@ -105,12 +105,12 @@ class AuthProvider with ChangeNotifier {
     try {
       deleteLoading = true;
       notifyListeners();
-     final response= await AuthRepo.deleteAccount();
+      final response = await AuthRepo.deleteAccount();
       deleteLoading = false;
       notifyListeners();
 
       /// save user is login
-      if(response==false)return;
+      if (response == false) return;
       await localStorage.setUserLogin(false);
       pushAndRemoveUntil(context, LoginScreen());
     } catch (e, s) {
@@ -143,7 +143,7 @@ class AuthProvider with ChangeNotifier {
     try {
       loginLoading = true;
       notifyListeners();
-      final response= await AuthRepo.login(
+      final response = await AuthRepo.login(
         email: emailController.text,
         password: passwordController.text,
       );
@@ -151,7 +151,7 @@ class AuthProvider with ChangeNotifier {
       notifyListeners();
 
       /// save user is login
-     if(response==false)return;
+      if (response == false) return;
       await localStorage.setUserLogin(true);
       pushAndRemoveUntil(context, ChooseRestaurant());
     } catch (e, s) {
@@ -172,7 +172,7 @@ class AuthProvider with ChangeNotifier {
     try {
       updateProfileLoading = true;
       notifyListeners();
-     final response= await AuthRepo.updateProfile(
+      final response = await AuthRepo.updateProfile(
         firstName: firstName,
         lastName: lastName,
         phoneNumber: phoneNumber,
@@ -180,7 +180,7 @@ class AuthProvider with ChangeNotifier {
       );
       updateProfileLoading = false;
       notifyListeners();
-      if(response)back(context);
+      if (response) back(context);
     } catch (e, s) {
       updateProfileLoading = false;
       notifyListeners();
