@@ -13,7 +13,7 @@ import 'package:fusion/utils/app_btn.dart';
 import 'package:fusion/utils/navigator.dart';
 
 class AddRestaurant extends StatelessWidget {
-   AddRestaurant({super.key});
+  AddRestaurant({super.key});
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
@@ -41,7 +41,7 @@ class AddRestaurant extends StatelessWidget {
 
       // Save restaurant details to Firestore
       DocumentReference restaurantRef =
-          await FirebaseFirestore.instance.collection('restaurants').add({
+      await FirebaseFirestore.instance.collection('restaurants').add({
         'name': name,
         'userId': userId,
         'location': location,
@@ -62,7 +62,7 @@ class AddRestaurant extends StatelessWidget {
 
       // Update the Firestore document with image and document URLs
       await restaurantRef.update({
-        "id":restaurantRef.id,
+        "id": restaurantRef.id,
         'imageUrl': imageDownloadUrl,
         'documentUrl': documentDownloadUrl,
       });
@@ -75,13 +75,13 @@ class AddRestaurant extends StatelessWidget {
   }
 
   // Function to upload file to Firebase Storage
-  Future<String> uploadFileToStorage(
-      String fileUrl, String folder, String fileName) async {
+  Future<String> uploadFileToStorage(String fileUrl, String folder,
+      String fileName) async {
     try {
       Reference storageReference =
-          FirebaseStorage.instance.ref().child('$folder/$fileName');
+      FirebaseStorage.instance.ref().child('$folder/$fileName');
       TaskSnapshot taskSnapshot =
-          await storageReference.putFile(File(fileUrl));
+      await storageReference.putFile(File(fileUrl));
       return await taskSnapshot.ref.getDownloadURL();
     } catch (error) {
       print('Error uploading file to storage: $error');
@@ -172,7 +172,8 @@ class AddRestaurant extends StatelessWidget {
                     color: Color(0xff777777),
                     height: 17 / 12,
                   ),
-                  textAlign: TextAlign.left,  `
+                  textAlign: TextAlign.left,
+
                 ),
               ),
               const Padding(
@@ -352,7 +353,7 @@ class AddRestaurant extends StatelessWidget {
                             padding: EdgeInsets.all(8.0),
                             child: Image(
                                 image:
-                                    AssetImage("assets/image/gallery-add.png")),
+                                AssetImage("assets/image/gallery-add.png")),
                           ),
                           Text(
                             "Choose file to upload Image",
