@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:velocity_x/velocity_x.dart';
+
 
 import 'package:flutter/material.dart';
 
@@ -152,7 +152,7 @@ class MyTheme {
 
   //color
   static Color creamColor = const Color(0xfff5f5f5);
-  static Color darkCreamColor = Vx.gray900;
+  static Color darkCreamColor = Colors.grey;
   static Color darkBluishColor = const Color(0xff403b58);
-  static Color lightBluishColor = Vx.indigo500;
+  static Color lightBluishColor = Colors.indigo;
 }
