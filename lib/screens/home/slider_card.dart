@@ -6,8 +6,14 @@ class SliderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
-      margin: EdgeInsets.symmetric(horizontal: 15),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+      border: Border.all(
+          color: Colors.black
+
+      )
+      ),
+      margin: EdgeInsets.symmetric(horizontal: 10),
       padding: EdgeInsets.all(15),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -27,7 +33,7 @@ class SliderCard extends StatelessWidget {
               //   ),
               //   textAlign: TextAlign.center,
               // ),
-               Row(
+              Row(
                 children: [
                   Text(
                     "9 mins delay",
@@ -93,7 +99,8 @@ class SliderCard extends StatelessWidget {
                 textAlign: TextAlign.left,
               ),
               Expanded(
-                child: Text(overflow: TextOverflow.ellipsis,
+                child: Text(
+                  overflow: TextOverflow.ellipsis,
                   "Restaurant Madlyan is a cozy...",
                   style: TextStyle(
                     fontFamily: "Jost",

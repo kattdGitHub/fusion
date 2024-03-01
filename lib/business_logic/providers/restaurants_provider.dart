@@ -1,12 +1,14 @@
 import 'dart:io';
+import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fusion/utils/navigator.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../repos/restaurants_Add.dart';
+import '../repos/restaurants_repo.dart';
 
 class RestaurantsProvider with ChangeNotifier {
   File? pickedImage;
@@ -62,8 +64,8 @@ class RestaurantsProvider with ChangeNotifier {
   void pickDoc() async {
     try {
       FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type:FileType.custom,
-        allowedExtensions: [ 'pdf', 'doc'],
+        type: FileType.custom,
+        allowedExtensions: ['pdf', 'doc'],
       );
       if (result == null || result.files.isEmpty) return;
 
@@ -75,4 +77,32 @@ class RestaurantsProvider with ChangeNotifier {
     }
   }
 
+
+
+  Future<void> selectTime(BuildContext context, {required TextEditingController controller}) async {
+    try {
+      final TimeOfDay? pickedTime = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay.now(),
+        builder: (BuildContext context, Widget? child) {
+          return MediaQuery(
+            data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+            child: child ?? SizedBox(),
+          );
+        },
+      );
+      if (pickedTime != null) {
+        print("$pickedTime");
+        controller.text = "${pickedTime.hour}:${pickedTime.minute}";
+
+        // Save the selected time to Firestore
+        await FirebaseFirestore.instance.collection('times').add({
+          'hour': pickedTime.hour,
+          'minute': pickedTime.minute,
+        });
+      }
+    } catch (e, s) {
+      print(s);
+    }
+  }
 }

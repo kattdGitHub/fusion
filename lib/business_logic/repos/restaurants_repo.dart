@@ -36,12 +36,12 @@ class RestaurantsRepo {
 
       String? imagePath = await AuthRepo.uploadImageFirebase(
         imageFile: imageFile,
-        fileName: imageFile.path.split("/").last,
+        docId: imageFile.path.split("/").last,
       );
 
       String? docPath = await AuthRepo.uploadImageFirebase(
         imageFile: docFile,
-        fileName: docFile.path.split("/").last,
+        docId: docFile.path.split("/").last,
       );
 
       body.addAll({

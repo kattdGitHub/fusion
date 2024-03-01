@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:fusion/business_logic/models/restaurant_model.dart';
 
 import 'package:fusion/screens/home/slider_card.dart';
 
 class Bookings extends StatelessWidget {
-  const Bookings({super.key});
-
+  const Bookings({super.key, required this.model});
+  final RestaurantModel model;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
