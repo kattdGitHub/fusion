@@ -1,8 +1,8 @@
-
 import 'package:fusion/Theme/theme.dart';
 import 'package:fusion/app_config/app_config.dart';
 import 'package:fusion/business_logic/providers/auth_provider.dart';
 import 'package:fusion/business_logic/providers/provider.dart';
+import 'package:fusion/business_logic/providers/restaurants_provider.dart';
 import 'package:fusion/screens/auth_screens/splash.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -37,6 +37,7 @@ class MyApp extends StatelessWidget {
             ChangeNotifierProvider(create: (context) => AuthProvider()),
             ChangeNotifierProvider(create: (context) => CounterProvider()),
             ChangeNotifierProvider(create: (context) => AddUserProvider()),
+            ChangeNotifierProvider(create: (context) => RestaurantsProvider()),
           ],
           child: MaterialApp(
             title: "Fusion",

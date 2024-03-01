@@ -11,6 +11,11 @@ class AppValidator {
       return 'Please enter first name';
     }
     return null;
+  }static String? customValidator({required String? value, required String massage}) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter ${massage}';
+    }
+    return null;
   }
 
   static String? lastValidator(String? value) {
