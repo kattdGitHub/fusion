@@ -5,6 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fusion/business_logic/models/restaurant_model.dart';
+import 'package:fusion/business_logic/repos/menu_repo.dart';
 import 'package:fusion/utils/navigator.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -13,7 +15,7 @@ import '../repos/restaurants_repo.dart';
 class RestaurantsProvider with ChangeNotifier {
   File? pickedImage;
   File? docFile;
-
+  String? restarurantIdLoading;
   bool restarurantLoading = false;
   final TextEditingController nameController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
@@ -24,6 +26,32 @@ class RestaurantsProvider with ChangeNotifier {
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController imageUrlController = TextEditingController();
   final TextEditingController documentUrlController = TextEditingController();
+
+  void clear() {
+    pickedImage = null;
+    nameController.clear();
+    locationController.clear();
+    phoneNumberController.clear();
+    websiteController.clear();
+    openTimeController.clear();
+    closeTimeController.clear();
+    descriptionController.clear();
+    imageUrlController.clear();
+    documentUrlController.clear();
+
+    notifyListeners();
+  }
+
+  void update(RestaurantModel restaurantModel) {
+    nameController.text = restaurantModel.name ?? '';
+    locationController.text = restaurantModel.location ?? '';
+    phoneNumberController.text = restaurantModel.phoneNumber ?? '';
+    openTimeController.text = restaurantModel.openTime ?? '';
+    closeTimeController.text = restaurantModel.closeTime ?? '';
+    descriptionController.text = restaurantModel.description ?? '';
+    imageUrlController.text = restaurantModel.image ?? '';
+    descriptionController.text = restaurantModel.description ?? '';
+  }
 
   Future<void> saveRestaurantDetails(BuildContext context) async {
     try {
@@ -42,6 +70,7 @@ class RestaurantsProvider with ChangeNotifier {
       restarurantLoading = false;
       notifyListeners();
       if (response == false) return;
+      clear();
       back(context);
     } catch (e, s) {
       restarurantLoading = false;
@@ -77,9 +106,8 @@ class RestaurantsProvider with ChangeNotifier {
     }
   }
 
-
-
-  Future<void> selectTime(BuildContext context, {required TextEditingController controller}) async {
+  Future<void> selectTime(BuildContext context,
+      {required TextEditingController controller}) async {
     try {
       final TimeOfDay? pickedTime = await showTimePicker(
         context: context,
@@ -94,11 +122,52 @@ class RestaurantsProvider with ChangeNotifier {
       if (pickedTime != null) {
         print("$pickedTime");
         controller.text = "${pickedTime.hour}:${pickedTime.minute}";
-
-
       }
     } catch (e, s) {
       print(s);
+    }
+  }
+  Future<void> editMenuDetails({
+    required BuildContext context,
+    required String menuId,
+  }) async {
+    try {
+      restarurantLoading = true;
+      notifyListeners();
+      final response = await MenuRepo.editMenu(
+        name: nameController.text,
+
+        description: descriptionController.text,
+        imageFile: pickedImage,
+        menuId:menuId,
+      );
+      restarurantLoading = false;
+      notifyListeners();
+      if (response == false) return;
+      clear();
+      back(context);
+    } catch (e, s) {
+      restarurantLoading = false;
+      notifyListeners();
+      print(
+        'restaurant${e.toString() + s.toString()}',
+      );
+    }
+  }
+
+  Future<void> deleteMenu(String restarurantId) async {
+    try {
+      restarurantIdLoading = restarurantId;
+      notifyListeners();
+      await MenuRepo.deleteMenu(restarurantId);
+      restarurantIdLoading = null;
+      notifyListeners();
+    } catch (e, s) {
+      restarurantIdLoading = null;
+      notifyListeners();
+      print(
+        'menu${e.toString() + s.toString()}',
+      );
     }
   }
 }

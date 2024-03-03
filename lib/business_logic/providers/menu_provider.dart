@@ -18,6 +18,7 @@ class MenuProvider with ChangeNotifier {
   TextEditingController quantityController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
 
+
   void clear() {
     pickedImage = null;
     nameController.clear();

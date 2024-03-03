@@ -23,12 +23,11 @@ class RestaurantsRepo {
   }) async {
     try {
       String userId = FirebaseAuth.instance.currentUser?.uid ?? '';
-      Map<String, dynamic> body={
+      Map<String, dynamic> body = {
         'name': name,
         'userId': userId,
         'location': location,
         'phoneNumber': phoneNumber,
-
         'openTime': openTime,
         'closeTime': closeTime,
         'description': description,
@@ -52,10 +51,8 @@ class RestaurantsRepo {
         "docPath": docPath,
       });
 
-     final doc= await restaurantsCollection.add(body);
-     await restaurantsCollection.doc(doc.id).update({
-       "id":doc.id
-     });
+      final doc = await restaurantsCollection.add(body);
+      await restaurantsCollection.doc(doc.id).update({"id": doc.id});
       showToast(text: 'Restaurant Created Successfully', success: true);
       return true;
     } catch (error) {
@@ -65,5 +62,53 @@ class RestaurantsRepo {
     }
   }
 
+  static Future<bool> restarurantMenu(String restarurantId) async {
+    try {
+      await restaurantsCollection.doc(restarurantId).delete();
+      showToast(text: 'restarurant delete Successfully', success: true);
+      return true;
+    } catch (error) {
+      print('Error saving restarurant delete: $error');
+      showToast(text: 'restarurant delete Failed');
+      return false;
+    }
+  }
 
+  static Future<bool> editRestarurant({
+    String? name,
+    String? description,
+    String? location,
+    String? phoneNumber,
+    String? openTime,
+    String? closeTime,
+    File? imageFile,
+    required String restaurantId,
+  }) async {
+    try {
+      Map<String, dynamic> body = {
+        if (name != null) 'name': name,
+        if (description != null) 'description': description,
+        if (location != null) 'location': location,
+        if (phoneNumber != null) 'phoneNumber': phoneNumber,
+        if (openTime != null) 'openTime': openTime,
+        if (closeTime != null) 'closeTime': closeTime,
+      };
+      if (imageFile != null) {
+        String? imagePath = await AuthRepo.uploadImageFirebase(
+          imageFile: imageFile,
+          docId: imageFile.path.split("/").last,
+        );
+        body.addAll({
+          "image": imagePath,
+        });
+      }
+      await restaurantsCollection.doc(restaurantId).update(body);
+      showToast(text: 'Restaurant Update Successfully', success: true);
+      return true;
+    } catch (e, s) {
+      print('Error saving restaurant Update: $e $s');
+      showToast(text: 'Restaurant Update Failed');
+      return false;
+    }
+  }
 }

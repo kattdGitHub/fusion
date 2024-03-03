@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:fusion/Iconspus/MenuPage/menu.dart';
 import 'package:fusion/app_config/app_config.dart';
 import 'package:fusion/business_logic/models/menu_model.dart';
 import 'package:fusion/business_logic/models/restaurant_model.dart';
@@ -10,12 +7,11 @@ import 'package:fusion/business_logic/providers/menu_provider.dart';
 import 'package:fusion/halper/image_helper.dart';
 import 'package:fusion/utils/app_btn.dart';
 import 'package:fusion/utils/app_validator.dart';
-import 'package:fusion/utils/navigator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class AddEditMenuScreen extends StatefulWidget {
-  AddEditMenuScreen({
+  const AddEditMenuScreen({
     super.key,
     required this.model,
     this.menuModel,
@@ -82,9 +78,8 @@ class _AddEditMenuScreenState extends State<AddEditMenuScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
                       controller: provider.nameController,
-                      validator: (value) =>
-                          AppValidator.customValidator(
-                              value: value, massage: "Name"),
+                      validator: (value) => AppValidator.customValidator(
+                          value: value, massage: "Name"),
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12))),
@@ -108,9 +103,8 @@ class _AddEditMenuScreenState extends State<AddEditMenuScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
                       controller: provider.quantityController,
-                      validator: (value) =>
-                          AppValidator.customValidator(
-                              value: value, massage: "Quantity"),
+                      validator: (value) => AppValidator.customValidator(
+                          value: value, massage: "Quantity"),
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12))),
@@ -134,9 +128,8 @@ class _AddEditMenuScreenState extends State<AddEditMenuScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
                       controller: provider.priceController,
-                      validator: (value) =>
-                          AppValidator.customValidator(
-                              value: value, massage: "Price"),
+                      validator: (value) => AppValidator.customValidator(
+                          value: value, massage: "Price"),
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12))),
@@ -160,9 +153,8 @@ class _AddEditMenuScreenState extends State<AddEditMenuScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
                       controller: provider.descriptionController,
-                      validator: (value) =>
-                          AppValidator.customValidator(
-                              value: value, massage: "Description"),
+                      validator: (value) => AppValidator.customValidator(
+                          value: value, massage: "Description"),
                       maxLines: 5,
                       decoration: const InputDecoration(
                         enabled: true,
@@ -221,8 +213,7 @@ class _AddEditMenuScreenState extends State<AddEditMenuScreen> {
                     padding: const EdgeInsets.all(10.0),
                     child: AppBtn(
                       isLoading: provider.menuLoading,
-                      title: widget.menuModel?.id == null
-                          ? "Save" : "Update",
+                      title: widget.menuModel?.id == null ? "Save" : "Update",
                       style: const TextStyle(
                         fontFamily: "Jost",
                         fontSize: 18,
@@ -238,7 +229,8 @@ class _AddEditMenuScreenState extends State<AddEditMenuScreen> {
                               context: context, restaurantId: widget.model.id);
                         } else {
                           context.read<MenuProvider>().editMenuDetails(
-                              context: context, menuId: widget.menuModel?.id??'');
+                              context: context,
+                              menuId: widget.menuModel?.id ?? '');
                         }
                       },
                     ),
@@ -299,5 +291,4 @@ class _AddEditMenuScreenState extends State<AddEditMenuScreen> {
       );
     }
   }
-
 }
