@@ -44,7 +44,10 @@ class RestaurantsRepo {
         docId: docFile.path.split("/").last,
       );
 
+      // Get the current timestamp
+      Timestamp createdAt = Timestamp.now();
       body.addAll({
+        "createdAt": createdAt,
         "image": imagePath,
         "docPath": docPath,
       });

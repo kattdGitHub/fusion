@@ -65,12 +65,14 @@ class AuthRepo {
   static Future<void> addUserToFirestore(User? user) async {
     try {
       if (user != null) {
-        print(">>>>>>>>>>>>>>${user.toString()}");
+        // Get the current timestamp
+        Timestamp createdAt = Timestamp.now();
         await users.doc(user.uid).set({
           'uid': user.uid,
           "phoneNumber": user.phoneNumber,
           'firstName': user.displayName,
           'email': user.email,
+          "createdAt": createdAt,
           if (user.photoURL != null || user.providerData.isNotEmpty == true)
             "image": user.photoURL ?? user.providerData.first.photoURL,
         });
@@ -97,7 +99,9 @@ class AuthRepo {
     required String email,
     String? firstName,
     String? lastName,
+    String? dialCode,
     String? phoneNumber,
+    String? countryCode,
     required String password,
     required File imageFile,
   }) async {
@@ -106,6 +110,7 @@ class AuthRepo {
         "email": email,
         "firstName": firstName,
         "lastName": lastName,
+        "countryCode": countryCode,
         "phoneNumber": phoneNumber,
       };
 
@@ -129,9 +134,10 @@ class AuthRepo {
       // Get the current timestamp
       Timestamp createdAt = Timestamp.now();
       body.addAll({
+        "createdAt": createdAt,
         "image": imagePath,
         "uid": user.uid,
-        "createdAt": createdAt,
+
       });
 
       await users.doc(user.uid).set(body);
@@ -199,6 +205,8 @@ class AuthRepo {
   static Future<bool> updateProfile({
     required String? firstName,
     required String? lastName,
+    required String? countryCode,
+    required String? dialCode,
     required String? phoneNumber,
     required File? imageFile,
   }) async {
@@ -207,6 +215,8 @@ class AuthRepo {
       if (userId == null) return false;
       Map<String, dynamic> updatedData = {};
       if (firstName != null) updatedData['firstName'] = firstName;
+      if (countryCode != null) updatedData['countryCode'] = countryCode;
+      if (dialCode != null) updatedData['dialCode'] = dialCode;
       if (lastName != null) updatedData['lastName'] = lastName;
       if (phoneNumber != null) updatedData['phoneNumber'] = phoneNumber;
 
@@ -232,8 +242,8 @@ class AuthRepo {
   static Future<bool> deleteAccount() async {
     try {
       String? userId = FirebaseAuth.instance.currentUser?.uid;
-      await users.doc(userId).delete();
       await auth.currentUser?.delete();
+      await users.doc(userId).delete();
       showToast(text: 'Account deleted successfully', success: true);
       return true;
     } catch (e, s) {

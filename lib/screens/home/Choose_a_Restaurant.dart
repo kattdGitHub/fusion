@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fusion/Iconspus/ProfileIcons/profile_page.dart';
 import 'package:fusion/Restaurant/add_restaurant.dart';
 import 'package:fusion/Screen_All/home_pageNew.dart';
 import 'package:fusion/business_logic/models/restaurant_model.dart';
@@ -10,14 +11,6 @@ import 'package:fusion/dashboard/Dashboard.dart';
 import 'package:fusion/screens/home/restaurant_home_page.dart';
 import 'package:fusion/utils/navigator.dart';
 
-final list = [
-  "Brazil",
-  "Italia (Disabled)",
-  "Tunisia" "Brazil",
-  "Italia (Disabled)",
-  "Tunisia",
-  'Canada'
-];
 
 class ChooseRestaurant extends StatelessWidget {
   const ChooseRestaurant({super.key});
@@ -41,12 +34,14 @@ class ChooseRestaurant extends StatelessWidget {
             ),
           ),
           actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: Icon(
-                Icons.person,
-                size: 20,
-                color: Colors.green,
+            InkWell(onTap: () => pushTo(context,ProfilePage()),
+              child: Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Icon(
+                  Icons.person,
+                  size: 30,
+                  color: Colors.green,
+                ),
               ),
             )
           ],
@@ -95,9 +90,9 @@ class ChooseRestaurant extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             pushTo(context, AddRestaurant());
-          },
+          },backgroundColor: Colors.green,
           child: Icon(
-            CupertinoIcons.add,
+            CupertinoIcons.add,color: Colors.white,
             size: 25.sp,
           ),
         ));

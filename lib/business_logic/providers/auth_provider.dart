@@ -25,6 +25,8 @@ class UserProvider with ChangeNotifier {
     required BuildContext context,
     required TextEditingController firstName,
     required TextEditingController lastName,
+    required TextEditingController countryCode,
+    required TextEditingController dialCode,
     required TextEditingController phoneNumber,
     required TextEditingController emailController,
     required TextEditingController passwordController,
@@ -36,7 +38,9 @@ class UserProvider with ChangeNotifier {
       final response = await AuthRepo.createUser(
         email: emailController.text,
         firstName: firstName.text,
+        dialCode: dialCode.text,
         lastName: lastName.text,
+        countryCode: countryCode.text,
         phoneNumber: phoneNumber.text,
         password: passwordController.text,
         imageFile: pickedImage ?? File(""),
@@ -46,6 +50,7 @@ class UserProvider with ChangeNotifier {
 
       /// save user is login
       if (response == false) return;
+      pickedImage=null;
       await localStorage.setUserLogin(true);
       pushAndRemoveUntil(context, const ChooseRestaurant());
     } catch (e, s) {
@@ -90,6 +95,7 @@ class UserProvider with ChangeNotifier {
       /// save user is login
       if (response == false) return;
       await localStorage.setUserLogin(false);
+      back(context);
       pushAndRemoveUntil(context, LoginScreen());
     } catch (e, s) {
       logOutLoading = false;
@@ -98,10 +104,7 @@ class UserProvider with ChangeNotifier {
     }
   }
 
-  void deleteAccount({
-    required BuildContext context,
-    required String userId,
-  }) async {
+  void deleteAccount(BuildContext context) async {
     try {
       deleteLoading = true;
       notifyListeners();
@@ -112,6 +115,7 @@ class UserProvider with ChangeNotifier {
       /// save user is login
       if (response == false) return;
       await localStorage.setUserLogin(false);
+      back(context);
       pushAndRemoveUntil(context, LoginScreen());
     } catch (e, s) {
       deleteLoading = false;
@@ -163,11 +167,12 @@ class UserProvider with ChangeNotifier {
 
   Future<void> updateProfile({
     required BuildContext context,
-    required String docId,
-    String? firstName,
-    String? lastName,
-    String? phoneNumber,
-    File? imageFile,
+   required String? firstName,
+   required String? lastName,
+   required String? dialCode,
+   required String? countryCode,
+   required String? phoneNumber,
+   required File? imageFile,
   }) async {
     try {
       updateProfileLoading = true;
@@ -175,12 +180,15 @@ class UserProvider with ChangeNotifier {
       final response = await AuthRepo.updateProfile(
         firstName: firstName,
         lastName: lastName,
+        dialCode: dialCode,
         phoneNumber: phoneNumber,
+        countryCode: countryCode,
         imageFile: imageFile,
       );
       updateProfileLoading = false;
       notifyListeners();
       if (response) back(context);
+      if (response) pickedImage=null;
     } catch (e, s) {
       updateProfileLoading = false;
       notifyListeners();

@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class RestaurantModel {
   String? name;
   String? userId;
@@ -9,6 +11,7 @@ class RestaurantModel {
   String? image;
   String? docPath;
   String? id;
+  Timestamp? createdAt;
 
   RestaurantModel({
     this.name,
@@ -16,6 +19,7 @@ class RestaurantModel {
     this.location,
     this.phoneNumber,
     this.openTime,
+    this.createdAt,
     this.closeTime,
     this.description,
     this.image,
@@ -28,6 +32,7 @@ class RestaurantModel {
     return RestaurantModel(
       name: json['name'],
       userId: json['userId'],
+      createdAt: json['createdAt'],
       location: json['location'],
       phoneNumber: json['phoneNumber'],
       openTime: json['openTime'],
@@ -45,6 +50,7 @@ class RestaurantModel {
       'name': name,
       'userId': userId,
       'location': location,
+      'createdAt': createdAt,
       'phoneNumber': phoneNumber,
       'openTime': openTime,
       'closeTime': closeTime,
@@ -53,31 +59,5 @@ class RestaurantModel {
       'docPath': docPath,
       'id': id,
     };
-  }
-
-  RestaurantModel copyWith({
-    String? name,
-    String? userId,
-    String? location,
-    String? phoneNumber,
-    String? openTime,
-    String? closeTime,
-    String? description,
-    String? image,
-    String? docPath,
-    String? id,
-  }) {
-    return RestaurantModel(
-      name: name ?? this.name,
-      userId: userId ?? this.userId,
-      location: location ?? this.location,
-      phoneNumber: phoneNumber ?? this.phoneNumber,
-      openTime: openTime ?? this.openTime,
-      closeTime: closeTime ?? this.closeTime,
-      description: description ?? this.description,
-      image: image ?? this.image,
-      docPath: docPath ?? this.docPath,
-      id: id ?? this.id,
-    );
   }
 }

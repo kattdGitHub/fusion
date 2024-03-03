@@ -5,6 +5,8 @@ class UserModel {
    String? firstName;
    String? lastName;
    String? phoneNumber;
+   String? countryCode;
+   String? dialCode;
    String? image;
    String? uid;
    Timestamp? createdAt;
@@ -13,6 +15,8 @@ class UserModel {
  this.email,
  this.firstName,
  this.lastName,
+ this.countryCode,
+ this.dialCode,
  this.phoneNumber,
  this.image,
  this.uid,
@@ -24,13 +28,17 @@ class UserModel {
     firstName: json['firstName'],
     lastName: json['lastName'],
     phoneNumber: json['phoneNumber'],
+    dialCode: json['dialCode'],
     image: json['image'],
     uid: json['uid'],
+    countryCode: json['countryCode'],
     createdAt: json['createdAt'],
   );
 
   Map<String, dynamic> toJson() => {
     'email': email,
+    'dialCode': dialCode,
+    'countryCode': countryCode,
     'firstName': firstName,
     'lastName': lastName,
     'phoneNumber': phoneNumber,
@@ -39,23 +47,4 @@ class UserModel {
     'createdAt': createdAt,
   };
 
-  UserModel copyWith({
-    String? email,
-    String? firstName,
-    String? lastName,
-    String? phoneNumber,
-    String? image,
-    String? uid,
-    Timestamp? createdAt,
-  }) {
-    return UserModel(
-      email: email ?? this.email,
-      firstName: firstName ?? this.firstName,
-      lastName: lastName ?? this.lastName,
-      phoneNumber: phoneNumber ?? this.phoneNumber,
-      image: image ?? this.image,
-      uid: uid ?? this.uid,
-      createdAt: createdAt ?? this.createdAt,
-    );
-  }
 }

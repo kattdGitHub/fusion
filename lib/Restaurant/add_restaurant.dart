@@ -131,62 +131,8 @@ class AddRestaurant extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          "Website",
-                          style: TextStyle(
-                            fontFamily: "Jost",
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xff777777),
-                            height: 17 / 12,
-                          ),
-                          textAlign: TextAlign.left,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: TextFormField(
-                          controller: provider.websiteController,
-                          decoration: InputDecoration(
-                            hintText: 'Website',
-                            contentPadding: EdgeInsets.all(10),
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          "Add Cuisines ",
-                          style: TextStyle(
-                            fontFamily: "Jost",
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xff777777),
-                            height: 17 / 12,
-                          ),
-                          textAlign: TextAlign.left,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: DropdownSearch<String>.multiSelection(
-                          items: [
-                            "Brazil",
-                            "Italia (Disabled)",
-                            "Tunisia" "Brazil",
-                            "Italia (Disabled)",
-                            "Tunisia",
-                            'Canada'
-                          ],
-                          popupProps: PopupPropsMultiSelection.menu(
-                            showSelectedItems: true,
-                          ),
-                          onChanged: print,
-                        ),
-                      ),
+
+
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(

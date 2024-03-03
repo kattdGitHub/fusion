@@ -87,6 +87,7 @@ class ForgotPassword extends StatelessWidget {
                       if (formKey.currentState?.validate() == false) return;
                       provider.resetPassword(context);
                     },
+                    isLoading: provider.resetPasswordLoading,
                     title: "Continue",
                     style: const TextStyle(
                       fontFamily: "Jost",

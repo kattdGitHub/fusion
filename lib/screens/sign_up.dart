@@ -15,13 +15,16 @@ import 'package:fusion/utils/app_btn.dart';
 import 'package:fusion/utils/app_validator.dart';
 import 'package:fusion/utils/navigator.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:provider/provider.dart';
 
 class SignUp extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
   final firstName = TextEditingController(text: "Jone");
   final lastName = TextEditingController(text: "Smith");
-  final phoneNumber = TextEditingController(text: "+919877518837");
+  final phoneNumber = TextEditingController(text: "9877518837");
+  final dialCode = TextEditingController(text: "IN");
+  final countryCode = TextEditingController(text: "+91");
   final emailController = TextEditingController(text: "Jone@gmail.com");
   final passwordController = TextEditingController(text: "12345678");
   final confirmPasswordController = TextEditingController(text: "12345678");
@@ -132,11 +135,19 @@ class SignUp extends StatelessWidget {
                         ),
                       ],
                     ),
-                    AppTextField(
+                    IntlPhoneField(
                       controller: phoneNumber,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: 'Phone Number',
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(),
+                        ),
                       ),
+                      initialCountryCode: 'IN',
+                      onCountryChanged: (country) {
+                        countryCode.text=country.code;
+                        dialCode.text=country.dialCode;
+                      },
                     ),
                     const Padding(
                       padding: EdgeInsets.all(8.0),
@@ -273,7 +284,9 @@ class SignUp extends StatelessWidget {
                           context: context,
                           firstName: firstName,
                           lastName: lastName,
+                          dialCode: dialCode,
                           phoneNumber: phoneNumber,
+                          countryCode: countryCode,
                           emailController: emailController,
                           passwordController: passwordController,
                           confirmPasswordController: confirmPasswordController,

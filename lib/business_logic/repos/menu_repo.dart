@@ -32,7 +32,10 @@ class MenuRepo {
         imageFile: imageFile,
         docId: imageFile.path.split("/").last,
       );
+      // Get the current timestamp
+      Timestamp createdAt = Timestamp.now();
       body.addAll({
+        "createdAt": createdAt,
         "image": imagePath,
       });
       final doc = await menuCollection.add(body);
