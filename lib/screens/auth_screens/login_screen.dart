@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
       body: Form(
         key: formKey,
         child: SafeArea(
-          child: Consumer<AuthProvider>(builder: (context, provider, child) {
+          child: Consumer<UserProvider>(builder: (context, provider, child) {
             return Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: SingleChildScrollView(

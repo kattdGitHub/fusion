@@ -95,11 +95,7 @@ class RestaurantsProvider with ChangeNotifier {
         print("$pickedTime");
         controller.text = "${pickedTime.hour}:${pickedTime.minute}";
 
-        // Save the selected time to Firestore
-        await FirebaseFirestore.instance.collection('times').add({
-          'hour': pickedTime.hour,
-          'minute': pickedTime.minute,
-        });
+
       }
     } catch (e, s) {
       print(s);

@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fusion/Restaurant/add_restaurant.dart';
 import 'package:fusion/Screen_All/home_pageNew.dart';
 import 'package:fusion/business_logic/models/restaurant_model.dart';
+import 'package:fusion/business_logic/repos/restaurants_repo.dart';
 import 'package:fusion/dashboard/Dashboard.dart';
 import 'package:fusion/screens/home/restaurant_home_page.dart';
 import 'package:fusion/utils/navigator.dart';
@@ -39,10 +40,19 @@ class ChooseRestaurant extends StatelessWidget {
               textAlign: TextAlign.left,
             ),
           ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: Icon(
+                Icons.person,
+                size: 20,
+                color: Colors.green,
+              ),
+            )
+          ],
         ),
         body: StreamBuilder(
-          stream:
-              FirebaseFirestore.instance.collection("restaurants").snapshots(),
+          stream: RestaurantsRepo.restaurantsCollection.snapshots(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.active) {
               if (snapshot.hasData) {
@@ -63,23 +73,23 @@ class ChooseRestaurant extends StatelessWidget {
                 );
               } else if (snapshot.hasError) {
                 return Center(
-                  child: Container(
+                  child: SizedBox(
                     height: 500,
                     width: 205,
                     child: Text(
-                      "${snapshot.error.toString()}",
+                      snapshot.error.toString(),
                     ),
                   ),
                 );
               }
             } else {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(
                   color: Colors.cyanAccent,
                 ),
               );
             }
-            return SizedBox();
+            return const SizedBox();
           },
         ),
         floatingActionButton: FloatingActionButton(

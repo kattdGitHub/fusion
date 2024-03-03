@@ -28,7 +28,7 @@ class ForgotPassword extends StatelessWidget {
           textAlign: TextAlign.left,
         ),
       ),
-      body: Consumer<AuthProvider>(
+      body: Consumer<UserProvider>(
         builder: (context, provider, child) {
           return Form(
             key: formKey,

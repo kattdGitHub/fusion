@@ -37,7 +37,7 @@ class SignUp extends StatelessWidget {
       body: SingleChildScrollView(
         child: Form(
           key: formKey,
-          child: Consumer<AuthProvider>(builder: (context, provider, child) {
+          child: Consumer<UserProvider>(builder: (context, provider, child) {
               return Padding(
                 padding:  EdgeInsets.symmetric(horizontal: 20.w),
                 child: Column(

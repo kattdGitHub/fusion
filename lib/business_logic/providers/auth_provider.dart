@@ -10,7 +10,7 @@ import 'package:fusion/utils/helper_widget.dart';
 import 'package:fusion/utils/navigator.dart';
 import 'package:image_picker/image_picker.dart';
 
-class AuthProvider with ChangeNotifier {
+class UserProvider with ChangeNotifier {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   File? pickedImage;
