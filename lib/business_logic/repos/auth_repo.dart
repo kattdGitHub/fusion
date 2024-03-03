@@ -9,7 +9,7 @@ class AuthRepo {
   static FirebaseAuth auth = FirebaseAuth.instance;
   static GoogleSignIn googleSignIn = GoogleSignIn();
   static CollectionReference users =
-      FirebaseFirestore.instance.collection('users');
+      FirebaseFirestore.instance.collection('Users');
 
   static Future<bool> resetPassword(String email) async {
     try {
@@ -52,11 +52,6 @@ class AuthRepo {
 
       final User? user = userCredential.user;
 
-      showToast(
-        text: 'User signed in with Google: ${user!.displayName}',
-        success: true,
-      );
-
       await addUserToFirestore(user);
       return true;
     } catch (error, tv) {
@@ -70,10 +65,14 @@ class AuthRepo {
   static Future<void> addUserToFirestore(User? user) async {
     try {
       if (user != null) {
+        print(">>>>>>>>>>>>>>${user.toString()}");
         await users.doc(user.uid).set({
           'uid': user.uid,
-          'displayName': user.displayName,
+          "phoneNumber": user.phoneNumber,
+          'firstName': user.displayName,
           'email': user.email,
+          if (user.photoURL != null || user.providerData.isNotEmpty == true)
+            "image": user.photoURL ?? user.providerData.first.photoURL,
         });
 
         showToast(text: 'User added to Firestore', success: true);
@@ -116,7 +115,8 @@ class AuthRepo {
         return false;
       }
 
-      final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -126,11 +126,12 @@ class AuthRepo {
         docId: user!.uid,
         imageFile: imageFile,
       );
-
+      // Get the current timestamp
+      Timestamp createdAt = Timestamp.now();
       body.addAll({
-        "doc_id": user.uid,
         "image": imagePath,
         "uid": user.uid,
+        "createdAt": createdAt,
       });
 
       await users.doc(user.uid).set(body);
@@ -144,7 +145,6 @@ class AuthRepo {
       return false;
     }
   }
-
 
   static Future<String?> uploadImageFirebase({
     required String docId,
@@ -204,7 +204,7 @@ class AuthRepo {
   }) async {
     try {
       String? userId = FirebaseAuth.instance.currentUser?.uid;
-      if(userId==null)return false;
+      if (userId == null) return false;
       Map<String, dynamic> updatedData = {};
       if (firstName != null) updatedData['firstName'] = firstName;
       if (lastName != null) updatedData['lastName'] = lastName;

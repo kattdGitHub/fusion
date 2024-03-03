@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
       builder: (_, child) {
         return MultiProvider(
           providers: [
-            ChangeNotifierProvider(create: (context) => AuthProvider()),
+            ChangeNotifierProvider(create: (context) => UserProvider()),
             ChangeNotifierProvider(create: (context) => CounterProvider()),
             ChangeNotifierProvider(create: (context) => AddUserProvider()),
             ChangeNotifierProvider(create: (context) => RestaurantsProvider()),
