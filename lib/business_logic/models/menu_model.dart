@@ -2,7 +2,8 @@ class MenuModel {
    String? id;
    String? name;
    String? userId;
-   double? price;
+   String? price;
+   String? quantity;
    String? restaurantId;
    String? description;
    String? image;
@@ -12,6 +13,7 @@ class MenuModel {
      this.name,
      this.userId,
      this.price,
+     this.quantity,
      this.restaurantId,
      this.description,
      this.image,
@@ -24,6 +26,7 @@ class MenuModel {
       name: json['name'],
       userId: json['userId'],
       price: json['price'],
+      quantity: json['quantity'],
       restaurantId: json['restaurantId'],
       description: json['description'],
       image: json['image'],
@@ -37,6 +40,7 @@ class MenuModel {
       'name': name,
       'userId': userId,
       'price': price,
+      'quantity': quantity,
       'restaurantId': restaurantId,
       'description': description,
       'image': image,
@@ -47,7 +51,8 @@ class MenuModel {
     String? id,
     String? name,
     String? userId,
-    double? price,
+    String? price,
+    String? quantity,
     String? restaurantId,
     String? description,
     String? image,
@@ -57,6 +62,7 @@ class MenuModel {
       name: name ?? this.name,
       userId: userId ?? this.userId,
       price: price ?? this.price,
+      quantity: quantity ?? this.quantity,
       restaurantId: restaurantId ?? this.restaurantId,
       description: description ?? this.description,
       image: image ?? this.image,

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -22,6 +23,7 @@ class MenuRepo {
       Map<String, dynamic> body = {
         'name': name,
         'userId': userId,
+        'quantity': quantity,
         'price': price,
         'restaurantId': restaurantId,
         'description': description,
@@ -37,9 +39,55 @@ class MenuRepo {
       await menuCollection.doc(doc.id).update({"id": doc.id});
       showToast(text: 'Menu Created Successfully', success: true);
       return true;
-    } catch (error) {
-      print('Error saving Menu details: $error');
+    } catch (e, s) {
+      print('Error saving Menu details: ${e.toString() + s.toString()}');
       showToast(text: 'Menu Created Failed');
+      return false;
+    }
+  }
+
+  static Future<bool> editMenu({
+    String? name,
+    String? quantity,
+    String? price,
+    String? description,
+    File? imageFile,
+    required String menuId,
+  }) async {
+    try {
+      Map<String, dynamic> body = {
+       if (name != null) 'name': name,
+       if (price != null) 'price': price,
+       if (quantity != null) 'quantity': quantity,
+       if (description != null) 'description': description,
+      };
+      if (imageFile != null) {
+        String? imagePath = await AuthRepo.uploadImageFirebase(
+          imageFile: imageFile,
+          docId: imageFile.path.split("/").last,
+        );
+        body.addAll({
+          "image": imagePath,
+        });
+      }
+      await menuCollection.doc(menuId).update(body);
+      showToast(text: 'Menu Update Successfully', success: true);
+      return true;
+    } catch (e, s) {
+      print('Error saving Menu Update: ${e.toString() + s.toString()}');
+      showToast(text: 'Menu Update Failed');
+      return false;
+    }
+  }
+
+  static Future<bool> deleteMenu(String menuId) async {
+    try {
+      await menuCollection.doc(menuId).delete();
+      showToast(text: 'Menu delete Successfully', success: true);
+      return true;
+    } catch (error) {
+      print('Error saving Menu delete: $error');
+      showToast(text: 'Menu delete Failed');
       return false;
     }
   }
