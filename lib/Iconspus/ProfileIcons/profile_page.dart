@@ -38,7 +38,7 @@ class ProfilePage extends StatelessWidget {
             if (snapshot.connectionState == ConnectionState.active) {
               if (snapshot.hasData) {
                 final userModel = UserModel.fromJson(
-                    jsonDecode(jsonEncode(snapshot.data?.data()??{})));
+                    snapshot.data?.data() as Map<String, dynamic>);
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: SingleChildScrollView(
@@ -200,7 +200,8 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ),
                 );
-              } else if (snapshot.hasError) {
+              }
+              else if (snapshot.hasError) {
                 return Center(
                   child: SizedBox(
                     height: 500,

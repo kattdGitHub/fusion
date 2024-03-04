@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'Iconspus/ProfileIcons/profile_page.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
             themeMode: ThemeMode.light,
             theme: MyTheme.lightTheme(context),
             darkTheme: MyTheme.darkTheme(context),
-            home: const SplashScreen(),
+            home: const ProfilePage(),
           ),
         );
       },

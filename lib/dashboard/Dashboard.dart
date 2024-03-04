@@ -31,7 +31,7 @@ class _DashboardState extends State<Dashboard> {
             ),
              MenuPage( model: widget.model,),
              Bookings( model: widget.model,),
-            const ProfilePage(),
+             ProfilePage(),
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
